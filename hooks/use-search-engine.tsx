@@ -185,7 +185,7 @@ export const searchEngines: SearchEngine[] = [
     additionalParams: "tabs=%7B%22searchApp%22%3A0%7D",
   },
   {
-    name: "Blog ErikRaft",
+    name: "ErikrafT Blog",
     url: "https://blog.erikraft.com/search",
     queryParam: "q",
     color: "#1E88E5",
