@@ -1,2 +1,3 @@
 # iSearch
-Pesquise com estilo
+ErikrafT's Web Browser
+O Browser na Web do ErikrafT
