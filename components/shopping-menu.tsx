@@ -219,6 +219,26 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
             </Link>
 
             <Link
+              href="https://www.extra.com.br"
+              onClick={handleLinkClick("https://www.extra.com.br", "Extra")}
+              className="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                <Image
+                  src="/images/logos/Extra_Shopping.ico"
+                  alt="Extra"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                />
+              </div>
+              <div>
+                <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Extra</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Eletrônicos, eletrodomésticos e mais</p>
+              </div>
+            </Link>
+
+            <Link
               href="https://www.ebay.com"
               onClick={handleLinkClick("https://www.ebay.com", "eBay")}
               className="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors"

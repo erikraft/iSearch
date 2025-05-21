@@ -20,6 +20,7 @@ export default function SearchEngineIcon({ engine, size = 24, className = "" }: 
     setIsLoading(true)
   }, [engine])
 
+  // Fallback to letter icon if no favicon or error loading
   if (!engine.favicon || imageError) {
     return (
       <div
@@ -43,7 +44,10 @@ export default function SearchEngineIcon({ engine, size = 24, className = "" }: 
         width={size}
         height={size}
         className={`rounded-full ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-200`}
-        onError={() => setImageError(true)}
+        onError={() => {
+          setImageError(true)
+          setIsLoading(false)
+        }}
         onLoad={() => setIsLoading(false)}
       />
       {isLoading && (

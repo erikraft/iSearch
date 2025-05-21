@@ -118,10 +118,38 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
     }, 100)
   }
 
-  // Filtrar mecanismos de pesquisa com base no termo de pesquisa
-  const filteredEngines = searchEngines
-    .slice(1)
-    .filter((engine) => searchTerm === "" || engine.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Função melhorada para filtrar mecanismos de pesquisa
+  const filterEngines = (engines: typeof searchEngines, term: string) => {
+    if (!term) return engines
+
+    const lowerTerm = term.toLowerCase()
+
+    return engines.filter((engine) => {
+      // Verificar se o termo corresponde ao nome do mecanismo
+      if (engine.name.toLowerCase().includes(lowerTerm)) return true
+
+      // Verificar se o termo corresponde a alguma palavra-chave do mecanismo
+      if (engine.keywords && engine.keywords.some((keyword) => keyword.toLowerCase().includes(lowerTerm))) return true
+
+      return false
+    })
+  }
+
+  // Filtrar o Google separadamente
+  const googleEngine = searchEngines[0]
+
+  // Filtrar GPT Search para destacá-lo quando termos relacionados forem pesquisados
+  const gptEngine = searchEngines.find((engine) => engine.name === "GPT Search")
+
+  // Verificar se o termo de pesquisa está relacionado ao GPT
+  const isGptRelatedSearch =
+    searchTerm &&
+    ["gpt", "chatgpt", "openai", "ia", "ai", "inteligência artificial", "artificial intelligence"].some((term) =>
+      searchTerm.toLowerCase().includes(term),
+    )
+
+  // Filtrar os demais mecanismos
+  const filteredEngines = filterEngines(searchEngines, searchTerm)
 
   if (!mounted) return null
 
@@ -194,23 +222,47 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
 
               {/* Google destacado */}
               <button
-                key={searchEngines[0].name}
+                key={googleEngine.name}
                 className={`flex items-center p-3 rounded-lg transition-all duration-200 w-full mb-3 ${
-                  selectedEngine?.name === searchEngines[0].name
+                  selectedEngine?.name === googleEngine.name
                     ? "bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800"
                     : "bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700"
                 }`}
-                onClick={() => selectEngineTemporarily(searchEngines[0])}
+                onClick={() => selectEngineTemporarily(googleEngine)}
               >
-                <SearchEngineIcon engine={searchEngines[0]} size={24} className="mr-3 flex-shrink-0" />
+                <SearchEngineIcon engine={googleEngine} size={24} className="mr-3 flex-shrink-0" />
                 <div className="flex flex-col items-start">
-                  <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{searchEngines[0].name}</span>
+                  <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{googleEngine.name}</span>
                   <span className="text-xs text-gray-500 dark:text-gray-400">Mecanismo de pesquisa padrão</span>
                 </div>
-                {selectedEngine?.name === searchEngines[0].name && (
+                {selectedEngine?.name === googleEngine.name && (
                   <FiCheck className="ml-auto text-blue-600 dark:text-blue-400" size={18} />
                 )}
               </button>
+
+              {/* GPT Search destacado quando relevante */}
+              {(isGptRelatedSearch || !searchTerm) && gptEngine && (
+                <button
+                  key={gptEngine.name}
+                  className={`flex items-center p-3 rounded-lg transition-all duration-200 w-full mb-3 ${
+                    isGptRelatedSearch
+                      ? "bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 animate-pulse"
+                      : selectedEngine?.name === gptEngine.name
+                        ? "bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800"
+                        : "bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700"
+                  }`}
+                  onClick={() => selectEngineTemporarily(gptEngine)}
+                >
+                  <SearchEngineIcon engine={gptEngine} size={24} className="mr-3 flex-shrink-0" />
+                  <div className="flex flex-col items-start">
+                    <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{gptEngine.name}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">Pesquisa com IA avançada</span>
+                  </div>
+                  {selectedEngine?.name === gptEngine.name && (
+                    <FiCheck className="ml-auto text-blue-600 dark:text-blue-400" size={18} />
+                  )}
+                </button>
+              )}
 
               {/* Contador de mecanismos */}
               <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">

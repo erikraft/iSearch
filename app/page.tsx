@@ -225,7 +225,7 @@ export default function ModernSearch() {
             </form>
           )}
 
-          <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
+          <div className="mt-8 md:mt-12 grid grid-cols-3 sm:grid-cols-5 gap-3 md:gap-4">
             <button
               onClick={() => openCategory("videos")}
               className="flex flex-col items-center p-3 md:p-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-20 md:w-24"

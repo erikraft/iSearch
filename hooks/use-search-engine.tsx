@@ -9,6 +9,7 @@ export type SearchEngine = {
   color?: string
   favicon?: string
   additionalParams?: string
+  keywords?: string[] // Adicionando campo para palavras-chave de pesquisa
 }
 
 // Modificar o array searchEngines para adicionar mais mecanismos de pesquisa
@@ -19,6 +20,15 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#4285F4",
     favicon: "https://www.google.com/favicon.ico",
+    keywords: ["google", "busca", "search", "pesquisa", "geral", "principal"],
+  },
+  {
+    name: "GPT Search",
+    url: "https://chat.openai.com/",
+    queryParam: "q",
+    color: "#10A37F", // Cor verde do OpenAI
+    favicon: "/images/logos/gpt_search_logo.png",
+    keywords: ["gpt", "chatgpt", "openai", "ia", "ai", "inteligência artificial", "artificial intelligence", "chat"],
   },
   {
     name: "Wikipedia",
@@ -26,6 +36,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "search",
     color: "#000000",
     favicon: "https://pt.wikipedia.org/static/favicon/wikipedia.ico",
+    keywords: ["wikipedia", "enciclopédia", "conhecimento", "artigos", "informação", "wiki"],
   },
   {
     name: "YouTube",
@@ -33,6 +44,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "search_query",
     color: "#FF0000",
     favicon: "https://www.youtube.com/favicon.ico",
+    keywords: ["youtube", "vídeos", "música", "streaming", "canal", "youtuber"],
   },
   {
     name: "Bing",
@@ -40,6 +52,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#008373",
     favicon: "https://www.bing.com/favicon.ico",
+    keywords: ["bing", "microsoft", "busca", "search", "pesquisa", "alternativo"],
   },
   {
     name: "Yahoo!",
@@ -47,13 +60,15 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "p",
     color: "#6001D2",
     favicon: "https://www.yahoo.com/favicon.ico",
+    keywords: ["yahoo", "busca", "search", "pesquisa", "email", "notícias"],
   },
   {
     name: "DuckDuckGo",
     url: "https://duckduckgo.com/",
     queryParam: "q",
     color: "#DE5833",
-    favicon: "https://duckduckgo.com/favicon.ico",
+    favicon: "/images/logos/duckduckgo_logo.png",
+    keywords: ["duckduckgo", "privacidade", "privacy", "anônimo", "sem rastreamento", "duck"],
   },
   {
     name: "Yandex",
@@ -61,6 +76,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "text",
     color: "#FF0000",
     favicon: "https://yandex.com/favicon.ico",
+    keywords: ["yandex", "russo", "russia", "busca", "search", "internacional"],
   },
   {
     name: "JW.org",
@@ -68,20 +84,23 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#4A6DA7",
     favicon: "https://www.jw.org/favicon.ico",
+    keywords: ["jw", "testemunhas de jeová", "bíblia", "religião", "publicações", "watchtower"],
   },
   {
     name: "Minecraft Wiki",
     url: "https://minecraft.wiki/w/Special:Search",
     queryParam: "search",
     color: "#70C050",
-    favicon: "https://minecraft.wiki/favicon.ico",
+    favicon: "/images/logos/minecraft_wiki_logo.ico",
+    keywords: ["minecraft", "wiki", "jogo", "game", "mojang", "crafting", "blocos", "mobs"],
   },
   {
     name: "Baidu",
     url: "https://www.baidu.com/s",
     queryParam: "wd",
     color: "#2932E1",
-    favicon: "https://www.baidu.com/favicon.ico",
+    favicon: "/images/logos/baidu_logo.png",
+    keywords: ["baidu", "china", "chinês", "busca", "search", "internacional", "asiático"],
   },
   {
     name: "Ecosia",
@@ -89,6 +108,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#4C7D4C",
     favicon: "https://www.ecosia.org/favicon.ico",
+    keywords: ["ecosia", "ecológico", "árvores", "sustentável", "meio ambiente", "eco"],
   },
   {
     name: "Qwant",
@@ -96,6 +116,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#5C97FF",
     favicon: "https://www.qwant.com/favicon.ico",
+    keywords: ["qwant", "privacidade", "europa", "francês", "privacy", "sem rastreamento"],
   },
   {
     name: "Startpage",
@@ -103,6 +124,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#6573FF",
     favicon: "https://www.startpage.com/favicon.ico",
+    keywords: ["startpage", "privacidade", "google", "anônimo", "privacy", "sem rastreamento"],
   },
   {
     name: "Ask.com",
@@ -110,6 +132,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#D51C29",
     favicon: "https://www.ask.com/favicon.ico",
+    keywords: ["ask", "perguntas", "respostas", "busca", "search", "ask jeeves"],
   },
   {
     name: "AOL",
@@ -117,6 +140,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#39CFFD",
     favicon: "/images/logos/aol_logo.svg",
+    keywords: ["aol", "america online", "vintage", "clássico", "email", "portal"],
   },
   {
     name: "Brave Search",
@@ -124,6 +148,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#FB542B",
     favicon: "/images/logos/brave_search_logo.png",
+    keywords: ["brave", "privacidade", "navegador", "browser", "privacy", "sem rastreamento", "crypto"],
   },
   {
     name: "Swisscows",
@@ -131,6 +156,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "query",
     color: "#FF0000",
     favicon: "https://swisscows.com/favicon.ico",
+    keywords: ["swisscows", "suíça", "privacidade", "família", "seguro", "sem rastreamento"],
   },
   {
     name: "Mojeek",
@@ -138,6 +164,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#5A4AE3",
     favicon: "https://www.mojeek.com/favicon.ico",
+    keywords: ["mojeek", "independente", "privacidade", "índice próprio", "uk", "britânico"],
   },
   {
     name: "Gibiru",
@@ -145,6 +172,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#F58220",
     favicon: "/images/logos/gibiru_logo.png",
+    keywords: ["gibiru", "não censurado", "privacidade", "alternativo", "uncensored", "liberdade"],
   },
   {
     name: "MetaGer",
@@ -152,6 +180,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "eingabe",
     color: "#9CCB3B",
     favicon: "https://metager.org/favicon.ico",
+    keywords: ["metager", "alemão", "privacidade", "meta busca", "sustentável", "sem fins lucrativos"],
   },
   {
     name: "SearX",
@@ -159,6 +188,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#444444",
     favicon: "https://searx.space/favicon.ico",
+    keywords: ["searx", "código aberto", "open source", "privacidade", "meta busca", "descentralizado"],
   },
   {
     name: "Presearch",
@@ -166,6 +196,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#2C65EF",
     favicon: "https://presearch.com/favicon.ico",
+    keywords: ["presearch", "blockchain", "descentralizado", "crypto", "token", "recompensas"],
   },
   {
     name: "Kagi",
@@ -173,6 +204,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#7C5295",
     favicon: "https://kagi.com/favicon.ico",
+    keywords: ["kagi", "premium", "ia", "personalizado", "sem anúncios", "privacidade"],
   },
   // Novos mecanismos de busca adicionados
   {
@@ -181,6 +213,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#70C050",
     favicon: "/images/logos/minecraft_search_logo.png",
+    keywords: ["minecraft", "mojang", "jogo", "game", "oficial", "microsoft", "blocos", "mods"],
     // Parâmetros adicionais para o Minecraft.net
     additionalParams: "tabs=%7B%22searchApp%22%3A0%7D",
   },
@@ -190,6 +223,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#1E88E5",
     favicon: "https://blog.erikraft.com/favicon.ico",
+    keywords: ["erikraft", "blog", "minecraft", "jogos", "games", "tutoriais", "mods", "servidor", "youtuber"],
   },
 ]
 

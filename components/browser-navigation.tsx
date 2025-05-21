@@ -100,13 +100,13 @@ export default function BrowserNavigation() {
           url = `https://${url}`
         }
 
-        // Abrir em uma nova guia
+        // Abrir em uma nova guia externa
         window.open(url, "_blank")
       } else {
         // É uma pesquisa - usar a função buildSearchUrl para criar a URL completa
         const searchUrl = buildSearchUrl(searchValue)
 
-        // Abrir em uma nova guia
+        // Abrir em uma nova guia externa
         window.open(searchUrl, "_blank")
       }
     }
