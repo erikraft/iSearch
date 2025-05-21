@@ -225,34 +225,34 @@ export default function ModernSearch() {
             </form>
           )}
 
-          <div className="mt-8 md:mt-12 grid grid-cols-3 sm:grid-cols-5 gap-3 md:gap-4">
+          <div className="mt-8 md:mt-12 flex justify-center items-center flex-wrap">
             <button
               onClick={() => openCategory("videos")}
-              className="flex flex-col items-center p-3 md:p-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-20 md:w-24"
+              className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
-              <FiVideo className="mb-2 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-sm md:text-base text-gray-600 dark:text-gray-400">Vídeos</span>
+              <FiVideo className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Vídeos</span>
             </button>
             <button
               onClick={() => openCategory("shopping")}
-              className="flex flex-col items-center p-3 md:p-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-20 md:w-24"
+              className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
-              <FiShoppingBag className="mb-2 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-sm md:text-base text-gray-600 dark:text-gray-400">Shopping</span>
+              <FiShoppingBag className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Shopping</span>
             </button>
             <button
               onClick={() => openCategory("news")}
-              className="flex flex-col items-center p-3 md:p-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-20 md:w-24"
+              className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
-              <FiFileText className="mb-2 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-sm md:text-base text-gray-600 dark:text-gray-400">Notícias</span>
+              <FiFileText className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Notícias</span>
             </button>
             <button
               onClick={() => openCategory("maps")}
-              className="flex flex-col items-center p-3 md:p-4 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-20 md:w-24"
+              className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
-              <FiMap className="mb-2 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-sm md:text-base text-gray-600 dark:text-gray-400">Mapas</span>
+              <FiMap className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Mapas</span>
             </button>
           </div>
         </div>
