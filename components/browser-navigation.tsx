@@ -122,59 +122,82 @@ export default function BrowserNavigation() {
     }
   }
 
+  // Update placeholder text based on screen size
+  useEffect(() => {
+    const updatePlaceholder = () => {
+      if (inputRef.current) {
+        inputRef.current.placeholder =
+          window.innerWidth < 640 ? "Pesquisar" : `Pesquisar no ${currentEngine.name} ou digitar URL`
+      }
+    }
+
+    // Initial update
+    updatePlaceholder()
+
+    // Add event listener for resize
+    window.addEventListener("resize", updatePlaceholder)
+
+    // Cleanup
+    return () => window.removeEventListener("resize", updatePlaceholder)
+  }, [currentEngine])
+
   return (
-    <div className="flex items-center w-full bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-2 py-1">
-      <div className="flex items-center space-x-1">
+    <div className="flex items-center w-full bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-1 sm:px-2 py-0.5 sm:py-1">
+      <div className="flex items-center space-x-0.5 sm:space-x-1">
         <button
           onClick={goBack}
           disabled={!canGoBack}
-          className={`p-1.5 rounded-full ${
+          className={`p-1 sm:p-1.5 rounded-full ${
             canGoBack
               ? "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
               : "text-gray-400 dark:text-gray-600 cursor-not-allowed"
           }`}
           aria-label="Voltar"
         >
-          <FiArrowLeft size={16} />
+          <FiArrowLeft size={14} className="sm:hidden" />
+          <FiArrowLeft size={16} className="hidden sm:block" />
         </button>
         <button
           onClick={goForward}
           disabled={!canGoForward}
-          className={`p-1.5 rounded-full ${
+          className={`p-1 sm:p-1.5 rounded-full ${
             canGoForward
               ? "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
               : "text-gray-400 dark:text-gray-600 cursor-not-allowed"
           }`}
           aria-label="Avançar"
         >
-          <FiArrowRight size={16} />
+          <FiArrowRight size={14} className="sm:hidden" />
+          <FiArrowRight size={16} className="hidden sm:block" />
         </button>
         <button
           onClick={refresh}
-          className="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+          className="p-1 sm:p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
           aria-label="Recarregar"
         >
-          <FiRefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
+          <FiRefreshCw size={14} className={`sm:hidden ${isLoading ? "animate-spin" : ""}`} />
+          <FiRefreshCw size={16} className={`hidden sm:block ${isLoading ? "animate-spin" : ""}`} />
         </button>
         <button
           onClick={goHome}
-          className="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+          className="p-1 sm:p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
           aria-label="Página inicial"
         >
-          <FiHome size={16} />
+          <FiHome size={14} className="sm:hidden" />
+          <FiHome size={16} className="hidden sm:block" />
         </button>
       </div>
 
-      <div className="flex-1 mx-2">
-        <div className="flex items-center bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-full px-3 py-1.5 w-full">
-          <div className="flex-shrink-0 mr-2">
+      <div className="flex-1 mx-1 sm:mx-2">
+        <div className="flex items-center bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-full px-2 sm:px-3 py-1 sm:py-1.5 w-full">
+          <div className="flex-shrink-0 mr-1 sm:mr-2">
             <SearchEngineIcon engine={currentEngine} size={16} className="browser-nav-icon" />
           </div>
           <input
             ref={inputRef}
             type="text"
-            className="flex-1 bg-transparent border-none outline-none text-sm text-gray-800 dark:text-gray-200"
-            placeholder={`Pesquisar no ${currentEngine.name} ou digitar URL`}
+            className="flex-1 min-w-0 bg-transparent border-none outline-none text-xs sm:text-sm text-gray-800 dark:text-gray-200 truncate"
+            placeholder={`${window.innerWidth < 640 ? "Pesquisar" : `Pesquisar no ${currentEngine.name} ou digitar URL`}`}
             value={currentUrl}
             onChange={(e) => setCurrentUrl(e.target.value)}
             onKeyDown={handleSearch}
