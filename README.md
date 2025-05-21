@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/erikraft/iSearch/">
-    <img src="https://search.erikraft.com/images/isearch-logo.png" alt="Logo"  width="1024" height="393">
+    <img src="https://search.erikraft.com/images/isearch-logo.png" alt="Logo"  width="500" height="192">
   </a>
 
   <p>
