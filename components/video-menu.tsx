@@ -72,6 +72,12 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
                   width={30}
                   height={30}
                   className="rounded-full"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.parentElement!.innerHTML =
+                      '<span class="text-white font-bold bg-red-600 w-full h-full rounded-full flex items-center justify-center">Y</span>'
+                  }}
                 />
               </div>
               <div>
@@ -145,6 +151,12 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
                   width={30}
                   height={30}
                   className="rounded-full"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.parentElement!.innerHTML =
+                      '<span class="text-white font-bold bg-black w-full h-full rounded-full flex items-center justify-center">T</span>'
+                  }}
                 />
               </div>
               <div>
@@ -154,12 +166,50 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
             </Link>
 
             <Link
+              href="https://www.kwai.com"
+              onClick={handleLinkClick("https://www.kwai.com", "Kwai")}
+              className="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors"
+            >
+              <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3 overflow-hidden">
+                <Image
+                  src="/images/logos/kwai_logo.png"
+                  alt="Kwai"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.parentElement!.innerHTML =
+                      '<span class="text-white font-bold bg-orange-500 w-full h-full rounded-full flex items-center justify-center">K</span>'
+                  }}
+                />
+              </div>
+              <div>
+                <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Kwai</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos curtos e entretenimento</p>
+              </div>
+            </Link>
+
+            <Link
               href="https://vimeo.com"
               onClick={handleLinkClick("https://vimeo.com", "Vimeo")}
               className="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors"
             >
               <div className="w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                <Image src="/images/logos/vimeo_logo.png" alt="Vimeo" width={30} height={30} className="rounded-full" />
+                <Image
+                  src="/images/logos/vimeo_logo.png"
+                  alt="Vimeo"
+                  width={30}
+                  height={30}
+                  className="rounded-full"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.parentElement!.innerHTML =
+                      '<span class="text-white font-bold bg-blue-500 w-full h-full rounded-full flex items-center justify-center">V</span>'
+                  }}
+                />
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Vimeo</p>
