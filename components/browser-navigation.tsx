@@ -13,50 +13,76 @@ export default function BrowserNavigation() {
   const [canGoForward, setCanGoForward] = useState(false)
   const [currentUrl, setCurrentUrl] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [placeholder, setPlaceholder] = useState("Pesquisar")
+  const [isMobile, setIsMobile] = useState(true)
   const { currentEngine, buildSearchUrl } = useSearchEngine()
   const router = useRouter()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Efeito para inicializar estados que dependem do navegador
   useEffect(() => {
-    // Verificar se podemos navegar para trás ou para frente
-    setCanGoBack(window.history.length > 1)
-
-    // Definir URL atual
-    setCurrentUrl(window.location.href)
-
-    // Adicionar listener para mudanças de URL
-    const handleUrlChange = () => {
-      setCurrentUrl(window.location.href)
+    // Verificar se estamos no cliente
+    if (typeof window !== "undefined") {
+      // Verificar se podemos navegar para trás ou para frente
       setCanGoBack(window.history.length > 1)
-      setCanGoForward(window.history.state !== null)
-    }
 
-    // Adicionar listener para o evento loadUrl
-    const handleLoadUrl = (e: CustomEvent) => {
-      if (e.detail && e.detail.url) {
-        setCurrentUrl(e.detail.url)
+      // Definir URL atual
+      setCurrentUrl(window.location.href)
+
+      // Verificar tamanho da tela para definir placeholder
+      setIsMobile(window.innerWidth < 640)
+      updatePlaceholder(window.innerWidth < 640)
+
+      // Adicionar listener para mudanças de URL
+      const handleUrlChange = () => {
+        setCurrentUrl(window.location.href)
+        setCanGoBack(window.history.length > 1)
+        setCanGoForward(window.history.state !== null)
       }
-    }
 
-    window.addEventListener("popstate", handleUrlChange)
-    window.addEventListener("loadUrl", handleLoadUrl as EventListener)
+      // Adicionar listener para o evento loadUrl
+      const handleLoadUrl = (e: CustomEvent) => {
+        if (e.detail && e.detail.url) {
+          setCurrentUrl(e.detail.url)
+        }
+      }
 
-    return () => {
-      window.removeEventListener("popstate", handleUrlChange)
-      window.removeEventListener("loadUrl", handleLoadUrl as EventListener)
+      // Adicionar listener para redimensionamento
+      const handleResize = () => {
+        const mobile = window.innerWidth < 640
+        setIsMobile(mobile)
+        updatePlaceholder(mobile)
+      }
+
+      window.addEventListener("popstate", handleUrlChange)
+      window.addEventListener("loadUrl", handleLoadUrl as EventListener)
+      window.addEventListener("resize", handleResize)
+
+      return () => {
+        window.removeEventListener("popstate", handleUrlChange)
+        window.removeEventListener("loadUrl", handleLoadUrl as EventListener)
+        window.removeEventListener("resize", handleResize)
+      }
     }
   }, [])
 
+  // Função para atualizar o placeholder com base no tamanho da tela
+  const updatePlaceholder = (isMobile: boolean) => {
+    if (isMobile) {
+      setPlaceholder("Pesquisar")
+    } else {
+      setPlaceholder(`Pesquisar no ${currentEngine.name} ou digitar URL`)
+    }
+  }
+
   // Atualizar o placeholder quando o mecanismo de busca muda
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.placeholder = `Pesquisar no ${currentEngine.name} ou digitar URL`
-    }
-  }, [currentEngine])
+    updatePlaceholder(isMobile)
+  }, [currentEngine, isMobile])
 
   const goBack = () => {
-    if (canGoBack) {
+    if (canGoBack && typeof window !== "undefined") {
       setIsLoading(true)
       window.history.back()
       setTimeout(() => setIsLoading(false), 500)
@@ -64,7 +90,7 @@ export default function BrowserNavigation() {
   }
 
   const goForward = () => {
-    if (canGoForward) {
+    if (canGoForward && typeof window !== "undefined") {
       setIsLoading(true)
       window.history.forward()
       setTimeout(() => setIsLoading(false), 500)
@@ -73,10 +99,12 @@ export default function BrowserNavigation() {
 
   const refresh = () => {
     setIsLoading(true)
-    if (iframeRef.current) {
-      iframeRef.current.src = iframeRef.current.src
-    } else {
-      window.location.reload()
+    if (typeof window !== "undefined") {
+      if (iframeRef.current) {
+        iframeRef.current.src = iframeRef.current.src
+      } else {
+        window.location.reload()
+      }
     }
     setTimeout(() => setIsLoading(false), 500)
   }
@@ -87,7 +115,7 @@ export default function BrowserNavigation() {
   }
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && typeof window !== "undefined") {
       e.preventDefault()
       const searchValue = e.currentTarget.value.trim()
 
@@ -121,25 +149,6 @@ export default function BrowserNavigation() {
       return false
     }
   }
-
-  // Update placeholder text based on screen size
-  useEffect(() => {
-    const updatePlaceholder = () => {
-      if (inputRef.current) {
-        inputRef.current.placeholder =
-          window.innerWidth < 640 ? "Pesquisar" : `Pesquisar no ${currentEngine.name} ou digitar URL`
-      }
-    }
-
-    // Initial update
-    updatePlaceholder()
-
-    // Add event listener for resize
-    window.addEventListener("resize", updatePlaceholder)
-
-    // Cleanup
-    return () => window.removeEventListener("resize", updatePlaceholder)
-  }, [currentEngine])
 
   return (
     <div className="flex items-center w-full bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700 px-1 sm:px-2 py-0.5 sm:py-1">
@@ -197,7 +206,7 @@ export default function BrowserNavigation() {
             ref={inputRef}
             type="text"
             className="flex-1 min-w-0 bg-transparent border-none outline-none text-xs sm:text-sm text-gray-800 dark:text-gray-200 truncate"
-            placeholder={`${window.innerWidth < 640 ? "Pesquisar" : `Pesquisar no ${currentEngine.name} ou digitar URL`}`}
+            placeholder={placeholder}
             value={currentUrl}
             onChange={(e) => setCurrentUrl(e.target.value)}
             onKeyDown={handleSearch}
