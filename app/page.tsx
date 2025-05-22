@@ -124,11 +124,48 @@ export default function ModernSearch() {
     const searchValue = searchInput.value.trim()
     if (!searchValue) return
 
-    // Usar a função buildSearchUrl para criar a URL de pesquisa completa
-    const searchUrl = buildSearchUrl(searchValue)
+    // Verificar se é uma URL
+    if (isValidUrl(searchValue)) {
+      let url = searchValue
+      // Adicionar protocolo se não tiver
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = `https://${url}`
+      }
 
-    // Abrir em uma nova guia
-    window.open(searchUrl, "_blank")
+      // Abrir URL diretamente em uma nova guia
+      window.open(url, "_blank")
+    } else {
+      // É uma pesquisa - usar a função buildSearchUrl para criar a URL de pesquisa completa
+      const searchUrl = buildSearchUrl(searchValue)
+
+      // Abrir em uma nova guia
+      window.open(searchUrl, "_blank")
+    }
+  }
+
+  // Função para validar se uma string é uma URL válida
+  const isValidUrl = (string: string) => {
+    try {
+      // Verificar se contém um domínio válido
+      const hasProtocol = string.startsWith("http://") || string.startsWith("https://")
+      const hasDomain = string.includes(".") && !string.includes(" ")
+
+      // Verificar se parece com uma URL (tem pelo menos um ponto e não tem espaços)
+      if (hasDomain) {
+        // Tentar criar uma URL para validação mais rigorosa
+        if (hasProtocol) {
+          new URL(string)
+          return true
+        } else {
+          // Testar com https:// adicionado
+          new URL(`https://${string}`)
+          return true
+        }
+      }
+      return false
+    } catch (_) {
+      return false
+    }
   }
 
   // Função para abrir o Google Doodles
