@@ -12,6 +12,7 @@ export default function BrowserNavigation() {
   const [canGoBack, setCanGoBack] = useState(false)
   const [canGoForward, setCanGoForward] = useState(false)
   const [currentUrl, setCurrentUrl] = useState("")
+  const [inputValue, setInputValue] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [placeholder, setPlaceholder] = useState("Pesquisar")
   const [isMobile, setIsMobile] = useState(true)
@@ -28,7 +29,9 @@ export default function BrowserNavigation() {
       setCanGoBack(window.history.length > 1)
 
       // Definir URL atual
-      setCurrentUrl(window.location.href)
+      const url = window.location.href
+      setCurrentUrl(url)
+      setInputValue(isHomePage() ? "" : url)
 
       // Verificar tamanho da tela para definir placeholder
       setIsMobile(window.innerWidth < 640)
@@ -36,7 +39,9 @@ export default function BrowserNavigation() {
 
       // Adicionar listener para mudanças de URL
       const handleUrlChange = () => {
-        setCurrentUrl(window.location.href)
+        const url = window.location.href
+        setCurrentUrl(url)
+        setInputValue(isHomePage() ? "" : url)
         setCanGoBack(window.history.length > 1)
         setCanGoForward(window.history.state !== null)
       }
@@ -44,7 +49,9 @@ export default function BrowserNavigation() {
       // Adicionar listener para o evento loadUrl
       const handleLoadUrl = (e: CustomEvent) => {
         if (e.detail && e.detail.url) {
-          setCurrentUrl(e.detail.url)
+          const url = e.detail.url
+          setCurrentUrl(url)
+          setInputValue(url)
         }
       }
 
@@ -111,6 +118,7 @@ export default function BrowserNavigation() {
 
   const goHome = () => {
     setIsLoading(true)
+    setInputValue("")
     router.push("/")
   }
 
@@ -148,6 +156,15 @@ export default function BrowserNavigation() {
     } catch (_) {
       return false
     }
+  }
+
+  // Função para verificar se estamos na página inicial
+  const isHomePage = () => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname
+      return path === "/" || path === ""
+    }
+    return false
   }
 
   return (
@@ -207,8 +224,8 @@ export default function BrowserNavigation() {
             type="text"
             className="flex-1 min-w-0 bg-transparent border-none outline-none text-xs sm:text-sm text-gray-800 dark:text-gray-200 truncate"
             placeholder={placeholder}
-            value={currentUrl}
-            onChange={(e) => setCurrentUrl(e.target.value)}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleSearch}
           />
         </div>
