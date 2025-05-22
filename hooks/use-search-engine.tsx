@@ -79,12 +79,20 @@ export const searchEngines: SearchEngine[] = [
     keywords: ["yandex", "russo", "russia", "busca", "search", "internacional"],
   },
   {
-    name: "JW.org",
+    name: "JW.ORG",
     url: "https://www.jw.org/pt/busca/",
     queryParam: "q",
     color: "#4A6DA7",
     favicon: "https://www.jw.org/favicon.ico",
     keywords: ["jw", "testemunhas de jeová", "bíblia", "religião", "publicações", "watchtower"],
+  },
+  {
+    name: "WOL.JW.ORG",
+    url: "https://wol.jw.org/pt/wol/s/r5/lp-t",
+    queryParam: "q",
+    color: "#799fcc",
+    favicon: "/images/logos/wol.jw.org_Logo.ico",
+    keywords: ["jw", "testemunhas de jeová", "biblioteca", "watchtower", "publicações", "revistas", "livros"],
   },
   {
     name: "Minecraft Wiki",
