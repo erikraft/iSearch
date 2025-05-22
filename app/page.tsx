@@ -97,6 +97,22 @@ export default function ModernSearch() {
     }
   }, [currentEngine, t])
 
+  // Adicione este useEffect após os outros useEffects
+  useEffect(() => {
+    // Listener para mudanças de idioma
+    const handleLocaleChange = () => {
+      // Forçar re-renderização do componente
+      setMounted(false)
+      setTimeout(() => setMounted(true), 0)
+    }
+
+    window.addEventListener("localeChanged", handleLocaleChange)
+
+    return () => {
+      window.removeEventListener("localeChanged", handleLocaleChange)
+    }
+  }, [])
+
   // Função para abrir a categoria específica
   const openCategory = (category: string) => {
     switch (category) {
