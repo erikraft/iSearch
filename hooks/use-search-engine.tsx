@@ -27,7 +27,7 @@ export const searchEngines: SearchEngine[] = [
     url: "https://chat.openai.com/",
     queryParam: "q",
     color: "#10A37F", // Cor verde do OpenAI
-    favicon: "/images/logos/gpt_search_logo.png",
+    favicon: "https://chat.openai.com/favicon.ico", // Atualizado para usar o favicon oficial
     keywords: ["gpt", "chatgpt", "openai", "ia", "ai", "inteligência artificial", "artificial intelligence", "chat"],
   },
   {
@@ -67,7 +67,7 @@ export const searchEngines: SearchEngine[] = [
     url: "https://duckduckgo.com/",
     queryParam: "q",
     color: "#DE5833",
-    favicon: "/images/logos/duckduckgo_logo.png",
+    favicon: "https://duckduckgo.com/favicon.ico", // Atualizado para usar o favicon oficial diretamente
     keywords: ["duckduckgo", "privacidade", "privacy", "anônimo", "sem rastreamento", "duck"],
   },
   {
