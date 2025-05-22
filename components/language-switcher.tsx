@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
-import { FiGlobe, FiCheck, FiChevronDown } from "react-icons/fi"
+import { useState, useEffect } from "react"
+import { FiGlobe, FiCheck, FiChevronDown, FiX } from "react-icons/fi"
 import { type Locale, useTranslation } from "@/lib/i18n"
 
 // Mapeamento de idiomas para nomes legíveis
@@ -33,42 +33,47 @@ const localeFlags: Record<Locale, string> = {
 export default function LanguageSwitcher() {
   const { locale, changeLocale, availableLocales } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Fechar o dropdown quando clicar fora dele
+  // Verificar se é dispositivo móvel
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
-      }
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640)
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Adicionar este useEffect após o useEffect existente
+  // Função para mudar o idioma e forçar a atualização da página
+  const handleLanguageChange = (newLocale: Locale) => {
+    changeLocale(newLocale)
+    setIsOpen(false)
+
+    // Forçar atualização da página para aplicar as traduções
+    setTimeout(() => {
+      window.location.reload()
+    }, 100)
+  }
+
+  // Impedir rolagem do body quando o modal estiver aberto
   useEffect(() => {
-    function handleResize() {
-      // Forçar re-renderização quando a janela for redimensionada
-      if (isOpen) {
-        setIsOpen(false)
-        setTimeout(() => setIsOpen(true), 0)
-      }
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
     }
 
-    window.addEventListener("resize", handleResize)
     return () => {
-      window.removeEventListener("resize", handleResize)
+      document.body.style.overflow = ""
     }
   }, [isOpen])
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <>
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(true)}
         className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
         aria-label="Mudar idioma"
       >
@@ -78,38 +83,41 @@ export default function LanguageSwitcher() {
       </button>
 
       {isOpen && (
-        <div
-          className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50 origin-top-right"
-          style={{
-            maxHeight: "80vh",
-            overflowY: "auto",
-            maxWidth: "calc(100vw - 20px)",
-            transform: "translateX(0)",
-            right: window.innerWidth < 640 ? "0" : "auto",
-          }}
-        >
-          <div className="py-1">
-            {availableLocales.map((localeOption) => (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-xs w-full max-h-[80vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+              <h3 className="font-medium">Select language</h3>
               <button
-                key={localeOption}
-                className={`flex items-center w-full px-4 py-2 text-sm ${
-                  locale === localeOption
-                    ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-                onClick={() => {
-                  changeLocale(localeOption)
-                  setIsOpen(false)
-                }}
+                onClick={() => setIsOpen(false)}
+                className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <span className="mr-2">{localeFlags[localeOption]}</span>
-                <span className="flex-1 text-left">{localeNames[localeOption]}</span>
-                {locale === localeOption && <FiCheck className="text-blue-600 dark:text-blue-400" size={16} />}
+                <FiX size={18} />
               </button>
-            ))}
+            </div>
+
+            <div className="overflow-y-auto" style={{ maxHeight: "calc(80vh - 60px)" }}>
+              {availableLocales.map((localeOption) => (
+                <button
+                  key={localeOption}
+                  className={`flex items-center w-full px-4 py-3 text-sm ${
+                    locale === localeOption
+                      ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  }`}
+                  onClick={() => handleLanguageChange(localeOption)}
+                >
+                  <span className="mr-3 text-lg">{localeFlags[localeOption]}</span>
+                  <span className="flex-1 text-left">{localeNames[localeOption]}</span>
+                  {locale === localeOption && <FiCheck className="text-blue-600 dark:text-blue-400" size={18} />}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
