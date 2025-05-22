@@ -15,4 +15,3 @@
 - 🔘｜Buttons for: Videos, Shopping, News and Maps
 - 🧰｜You can create new tabs, refresh the page, go back and forward between pages, and open the home page.
 - 🌓｜It has Themes: Dark, Light and System Default
-- ⚠️｜**IMPORTANT:** for now we only have the language "Brazilian Portuguese (PT-BR)"
