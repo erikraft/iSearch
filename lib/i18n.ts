@@ -413,6 +413,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 export function useTranslation() {
   const [locale, setLocale] = useState<Locale>("pt-BR")
   const [country, setCountry] = useState<string | null>(null)
+  const [translationsLoaded, setTranslationsLoaded] = useState(false)
 
   // Detectar o país do usuário
   useEffect(() => {
@@ -431,6 +432,7 @@ export function useTranslation() {
           localStorage.setItem("locale", detectedLocale)
           localStorage.setItem("country", data.country)
         }
+        setTranslationsLoaded(true)
       } catch (error) {
         console.error("Erro ao detectar país:", error)
 
@@ -447,6 +449,7 @@ export function useTranslation() {
             localStorage.setItem("locale", matchingLocale)
           }
         }
+        setTranslationsLoaded(true)
       }
     }
 
@@ -459,6 +462,7 @@ export function useTranslation() {
       if (savedCountry) {
         setCountry(savedCountry)
       }
+      setTranslationsLoaded(true)
     } else {
       detectCountry()
     }
@@ -467,7 +471,12 @@ export function useTranslation() {
   // Função para traduzir uma string
   const t = useCallback(
     (key: string, params?: Record<string, string>) => {
-      const translation = translations[locale][key] || key
+      if (!translationsLoaded) {
+        // Retornar a chave se as traduções ainda não foram carregadas
+        return key
+      }
+
+      const translation = translations[locale]?.[key] || key
 
       if (params) {
         return Object.entries(params).reduce((str, [key, value]) => str.replace(`{${key}}`, value), translation)
@@ -475,14 +484,26 @@ export function useTranslation() {
 
       return translation
     },
-    [locale],
+    [locale, translationsLoaded],
   )
 
   // Função para mudar o idioma manualmente
-  const changeLocale = useCallback((newLocale: Locale) => {
-    setLocale(newLocale)
-    localStorage.setItem("locale", newLocale)
-  }, [])
+  const changeLocale = useCallback(
+    (newLocale: Locale) => {
+      if (newLocale !== locale) {
+        console.log(`Mudando idioma de ${locale} para ${newLocale}`)
+        setLocale(newLocale)
+        localStorage.setItem("locale", newLocale)
+
+        // Disparar um evento personalizado para notificar a mudança de idioma
+        if (typeof window !== "undefined") {
+          const event = new CustomEvent("localeChanged", { detail: { locale: newLocale } })
+          window.dispatchEvent(event)
+        }
+      }
+    },
+    [locale],
+  )
 
   return {
     t,
@@ -490,5 +511,6 @@ export function useTranslation() {
     country,
     changeLocale,
     availableLocales: Object.keys(translations) as Locale[],
+    translationsLoaded,
   }
 }
