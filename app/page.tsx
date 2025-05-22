@@ -15,6 +15,8 @@ import ShoppingMenu from "@/components/shopping-menu"
 import NewsMenu from "@/components/news-menu"
 import SettingsMenu from "@/components/settings-menu"
 import ThemeSwitcher from "@/components/theme-switcher"
+import LanguageSwitcher from "@/components/language-switcher"
+import { useTranslation } from "@/lib/i18n"
 
 export default function ModernSearch() {
   const [mounted, setMounted] = useState(false)
@@ -29,13 +31,14 @@ export default function ModernSearch() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [showHomepage, setShowHomepage] = useState(true)
   const [currentIframeUrl, setCurrentIframeUrl] = useState("")
+  const { t } = useTranslation()
 
   useEffect(() => {
     setMounted(true)
 
     // Atualizar o placeholder imediatamente após a montagem
     if (searchInputRef.current && currentEngine) {
-      searchInputRef.current.placeholder = `Pesquisar no ${currentEngine.name} ou digitar URL`
+      searchInputRef.current.placeholder = t("search_in", { engine: currentEngine.name })
     }
 
     // Desabilitar menu de contexto globalmente
@@ -62,14 +65,14 @@ export default function ModernSearch() {
       document.removeEventListener("contextmenu", disableContextMenu)
       window.removeEventListener("loadUrlInIframe", handleLoadUrlInIframe as EventListener)
     }
-  }, [currentEngine])
+  }, [currentEngine, t])
 
   useEffect(() => {
     setMounted(true)
 
     // Atualizar o placeholder imediatamente após a montagem
     if (searchInputRef.current && currentEngine) {
-      searchInputRef.current.placeholder = `Pesquisar no ${currentEngine.name} ou digitar URL`
+      searchInputRef.current.placeholder = t("search_in", { engine: currentEngine.name })
     }
 
     // Desabilitar menu de contexto globalmente
@@ -85,14 +88,14 @@ export default function ModernSearch() {
     return () => {
       document.removeEventListener("contextmenu", disableContextMenu)
     }
-  }, [currentEngine])
+  }, [currentEngine, t])
 
   // Atualizar o placeholder quando o mecanismo de busca muda
   useEffect(() => {
     if (searchInputRef.current) {
-      searchInputRef.current.placeholder = `Pesquisar no ${currentEngine.name} ou digitar URL`
+      searchInputRef.current.placeholder = t("search_in", { engine: currentEngine.name })
     }
-  }, [currentEngine])
+  }, [currentEngine, t])
 
   // Função para abrir a categoria específica
   const openCategory = (category: string) => {
@@ -192,6 +195,7 @@ export default function ModernSearch() {
       <div className="flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700">
         <div className="flex items-center space-x-2">
           <ThemeSwitcher />
+          <LanguageSwitcher />
         </div>
         <div>
           <button
@@ -199,7 +203,7 @@ export default function ModernSearch() {
             className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900 hover:bg-blue-200 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-300 rounded-md text-sm font-medium transition-colors flex items-center"
           >
             <FiSettings className="mr-1.5" size={16} />
-            Alterar mecanismo de busca
+            {t("settings")}
           </button>
         </div>
       </div>
@@ -219,7 +223,7 @@ export default function ModernSearch() {
                 draggable={false}
               />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg">Pesquise com estilo</p>
+            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg">{t("search_with_style")}</p>
           </div>
 
           {engineMounted && (
@@ -233,14 +237,14 @@ export default function ModernSearch() {
                     name={currentEngine.queryParam}
                     type="text"
                     className="flex-grow min-w-0 outline-none text-base md:text-lg bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
-                    aria-label="Search"
+                    aria-label={t("search")}
                     id="search-input"
-                    placeholder={`Pesquisar no ${currentEngine.name} ou digitar URL`}
+                    placeholder={t("search_in", { engine: currentEngine.name })}
                   />
                   <button
                     type="submit"
                     className="p-2 md:p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors duration-200 flex-shrink-0"
-                    aria-label="Pesquisar"
+                    aria-label={t("search")}
                   >
                     <FiSearch size={18} className="md:hidden" />
                     <FiSearch size={20} className="hidden md:block" />
@@ -255,7 +259,7 @@ export default function ModernSearch() {
                     onClick={openGoogleDoodles}
                     className="bg-white dark:bg-gray-800 px-5 py-2.5 md:px-6 md:py-3 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 flex items-center justify-center"
                   >
-                    🍀 Estou com Sorte
+                    🍀 {t("feeling_lucky")}
                   </a>
                 )}
               </div>
@@ -268,28 +272,28 @@ export default function ModernSearch() {
               className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
               <FiVideo className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Vídeos</span>
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t("videos")}</span>
             </button>
             <button
               onClick={() => openCategory("shopping")}
               className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
               <FiShoppingBag className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Shopping</span>
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t("shopping")}</span>
             </button>
             <button
               onClick={() => openCategory("news")}
               className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
               <FiFileText className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Notícias</span>
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t("news")}</span>
             </button>
             <button
               onClick={() => openCategory("maps")}
               className="flex flex-col items-center justify-center p-2 md:p-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-200 w-16 h-16 md:w-20 md:h-20 m-1"
             >
               <FiMap className="mb-1 text-blue-500 dark:text-blue-400" size={20} />
-              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Mapas</span>
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t("maps")}</span>
             </button>
           </div>
         </div>
@@ -301,18 +305,18 @@ export default function ModernSearch() {
           <div className="hidden md:flex md:flex-row md:justify-between">
             <div className="flex flex-wrap gap-y-2 gap-x-5">
               <Link href="/sobre" className="hover:text-blue-500 transition-colors duration-200">
-                Sobre
+                {t("about")}
               </Link>
               <Link href="/como-funciona" className="hover:text-blue-500 transition-colors duration-200">
-                Como funciona
+                {t("how_it_works")}
               </Link>
             </div>
             <div className="flex flex-wrap gap-y-2 gap-x-5">
               <Link href="/privacidade" className="hover:text-blue-500 transition-colors duration-200">
-                Privacidade
+                {t("privacy")}
               </Link>
               <Link href="/termos" className="hover:text-blue-500 transition-colors duration-200">
-                Termos
+                {t("terms")}
               </Link>
             </div>
           </div>
@@ -320,16 +324,16 @@ export default function ModernSearch() {
           {/* Footer para mobile */}
           <div className="md:hidden grid grid-cols-2 gap-3">
             <Link href="/sobre" className="hover:text-blue-500 transition-colors duration-200">
-              Sobre
+              {t("about")}
             </Link>
             <Link href="/privacidade" className="hover:text-blue-500 transition-colors duration-200">
-              Privacidade
+              {t("privacy")}
             </Link>
             <Link href="/como-funciona" className="hover:text-blue-500 transition-colors duration-200">
-              Como funciona
+              {t("how_it_works")}
             </Link>
             <Link href="/termos" className="hover:text-blue-500 transition-colors duration-200">
-              Termos
+              {t("terms")}
             </Link>
           </div>
         </div>
