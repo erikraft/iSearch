@@ -7,6 +7,7 @@ import { FiArrowLeft, FiArrowRight, FiRefreshCw, FiHome } from "react-icons/fi"
 import { useSearchEngine } from "@/hooks/use-search-engine"
 import { useRouter } from "next/navigation"
 import SearchEngineIcon from "@/components/search-engine-icon"
+import { useTranslation } from "@/lib/i18n"
 
 export default function BrowserNavigation() {
   const [canGoBack, setCanGoBack] = useState(false)
@@ -20,6 +21,7 @@ export default function BrowserNavigation() {
   const router = useRouter()
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { t } = useTranslation()
 
   // Efeito para inicializar estados que dependem do navegador
   useEffect(() => {
@@ -77,9 +79,9 @@ export default function BrowserNavigation() {
   // Função para atualizar o placeholder com base no tamanho da tela
   const updatePlaceholder = (isMobile: boolean) => {
     if (isMobile) {
-      setPlaceholder("Pesquisar")
+      setPlaceholder(t("search"))
     } else {
-      setPlaceholder(`Pesquisar no ${currentEngine.name} ou digitar URL`)
+      setPlaceholder(t("search_in", { engine: currentEngine.name }))
     }
   }
 
@@ -178,7 +180,7 @@ export default function BrowserNavigation() {
               ? "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
               : "text-gray-400 dark:text-gray-600 cursor-not-allowed"
           }`}
-          aria-label="Voltar"
+          aria-label={t("back")}
         >
           <FiArrowLeft size={14} className="sm:hidden" />
           <FiArrowLeft size={16} className="hidden sm:block" />
@@ -191,7 +193,7 @@ export default function BrowserNavigation() {
               ? "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
               : "text-gray-400 dark:text-gray-600 cursor-not-allowed"
           }`}
-          aria-label="Avançar"
+          aria-label={t("forward")}
         >
           <FiArrowRight size={14} className="sm:hidden" />
           <FiArrowRight size={16} className="hidden sm:block" />
@@ -199,7 +201,7 @@ export default function BrowserNavigation() {
         <button
           onClick={refresh}
           className="p-1 sm:p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
-          aria-label="Recarregar"
+          aria-label={t("reload")}
         >
           <FiRefreshCw size={14} className={`sm:hidden ${isLoading ? "animate-spin" : ""}`} />
           <FiRefreshCw size={16} className={`hidden sm:block ${isLoading ? "animate-spin" : ""}`} />
@@ -207,7 +209,7 @@ export default function BrowserNavigation() {
         <button
           onClick={goHome}
           className="p-1 sm:p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
-          aria-label="Página inicial"
+          aria-label={t("home")}
         >
           <FiHome size={14} className="sm:hidden" />
           <FiHome size={16} className="hidden sm:block" />
