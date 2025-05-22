@@ -90,6 +90,19 @@ export default function BrowserNavigation() {
     updatePlaceholder(isMobile)
   }, [currentEngine, isMobile])
 
+  // Garantir que o placeholder seja atualizado quando o idioma mudar
+  useEffect(() => {
+    const handleLocaleChange = () => {
+      updatePlaceholder(isMobile)
+    }
+
+    window.addEventListener("localeChanged", handleLocaleChange)
+
+    return () => {
+      window.removeEventListener("localeChanged", handleLocaleChange)
+    }
+  }, [isMobile])
+
   const goBack = () => {
     if (canGoBack && typeof window !== "undefined") {
       setIsLoading(true)

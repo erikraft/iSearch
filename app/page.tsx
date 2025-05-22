@@ -113,6 +113,21 @@ export default function ModernSearch() {
     }
   }, [])
 
+  // Adicionar um listener para mudanças de idioma no componente principal
+  useEffect(() => {
+    // Listener para mudanças de idioma
+    const handleLocaleChange = (e: CustomEvent) => {
+      console.log("Idioma alterado:", e.detail.locale)
+      // O reload da página será feito pela função changeLocale
+    }
+
+    window.addEventListener("localeChanged", handleLocaleChange as EventListener)
+
+    return () => {
+      window.removeEventListener("localeChanged", handleLocaleChange as EventListener)
+    }
+  }, [])
+
   // Função para abrir a categoria específica
   const openCategory = (category: string) => {
     switch (category) {

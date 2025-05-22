@@ -6,6 +6,7 @@ import { useRef, useEffect } from "react"
 import { FiX } from "react-icons/fi"
 import Link from "next/link"
 import Image from "next/image"
+import { useTranslation } from "@/lib/i18n"
 
 interface ShoppingMenuProps {
   isOpen: boolean
@@ -14,6 +15,7 @@ interface ShoppingMenuProps {
 
 export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslation()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,7 +47,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
         className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl max-w-md w-full max-h-[80vh] overflow-hidden flex flex-col"
       >
         <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Shopping</h2>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{t("shopping")}</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
@@ -55,7 +57,9 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
         </div>
 
         <div className="overflow-y-auto flex-grow p-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">Escolha uma plataforma para comprar produtos:</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            {t("choose_platform", { category: t("shopping").toLowerCase() })}
+          </p>
 
           <div className="space-y-3">
             <Link

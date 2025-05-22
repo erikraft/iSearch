@@ -31,7 +31,7 @@ const localeFlags: Record<Locale, string> = {
 }
 
 export default function LanguageSwitcher() {
-  const { locale, changeLocale, availableLocales } = useTranslation()
+  const { locale, changeLocale, availableLocales, t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -46,15 +46,11 @@ export default function LanguageSwitcher() {
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  // Função para mudar o idioma e forçar a atualização da página
+  // Modificar a função handleLanguageChange para remover o reload redundante
   const handleLanguageChange = (newLocale: Locale) => {
     changeLocale(newLocale)
     setIsOpen(false)
-
-    // Forçar atualização da página para aplicar as traduções
-    setTimeout(() => {
-      window.location.reload()
-    }, 100)
+    // A função changeLocale já inclui o reload da página
   }
 
   // Impedir rolagem do body quando o modal estiver aberto
@@ -89,7 +85,7 @@ export default function LanguageSwitcher() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
-              <h3 className="font-medium">Select language</h3>
+              <h3 className="font-medium">{t("select_language")}</h3>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
