@@ -286,9 +286,14 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
                   className="rounded-full"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement
-                    target.style.display = "none"
-                    target.parentElement!.innerHTML =
-                      '<div class="w-full h-full rounded-full bg-orange-500 flex items-center justify-center"><span class="text-white font-bold">T</span></div>'
+                    // Tentar carregar o favicon oficial
+                    target.src = "https://www.temu.com/favicon.ico"
+                    // Se o favicon oficial também falhar, mostrar a letra
+                    target.onerror = () => {
+                      target.style.display = "none"
+                      target.parentElement!.innerHTML =
+                        '<div class="w-full h-full rounded-full bg-orange-500 flex items-center justify-center"><span class="text-white font-bold">T</span></div>'
+                    }
                   }}
                 />
               </div>
