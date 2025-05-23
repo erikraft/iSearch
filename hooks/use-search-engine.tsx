@@ -9,10 +9,9 @@ export type SearchEngine = {
   color?: string
   favicon?: string
   additionalParams?: string
-  keywords?: string[] // Adicionando campo para palavras-chave de pesquisa
+  keywords?: string[]
 }
 
-// Modificar o array searchEngines para adicionar mais mecanismos de pesquisa
 export const searchEngines: SearchEngine[] = [
   {
     name: "Google",
@@ -24,12 +23,12 @@ export const searchEngines: SearchEngine[] = [
   },
   {
     name: "Google Images",
-    url: "https://www.google.com/imghp",
+    url: "https://www.google.com/search",
     queryParam: "q",
     color: "#4285F4",
     favicon: "/images/logos/google-logo-new-favicon-perfil.png",
     keywords: ["google", "imagens", "images", "fotos", "pictures", "visual", "busca visual"],
-    additionalParams: "hl=pt-BR&tab=ri&ogbl",
+    additionalParams: "udm=2&hl=pt-BR",
   },
   {
     name: "GPT Search",
@@ -37,7 +36,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#10A37F",
     favicon: "https://chat.openai.com/favicon.ico",
-    keywords: ["gpt", "chatgpt", "openai", "ia", "ai", "inteligência artificial", "artificial intelligence", "chat"],
+    keywords: ["gpt", "chatgpt", "openai", "ia", "ai", "inteligencia artificial", "artificial intelligence", "chat"],
   },
   {
     name: "Wikipedia",
@@ -45,7 +44,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "search",
     color: "#000000",
     favicon: "https://pt.wikipedia.org/static/favicon/wikipedia.ico",
-    keywords: ["wikipedia", "enciclopédia", "conhecimento", "artigos", "informação", "wiki", "encyclopedia"],
+    keywords: ["wikipedia", "enciclopedia", "conhecimento", "artigos", "informacao", "wiki", "encyclopedia"],
   },
   {
     name: "YouTube",
@@ -53,7 +52,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "search_query",
     color: "#FF0000",
     favicon: "https://www.youtube.com/favicon.ico",
-    keywords: ["youtube", "vídeos", "música", "streaming", "canal", "youtuber", "videos", "music"],
+    keywords: ["youtube", "videos", "musica", "streaming", "canal", "youtuber", "videos", "music"],
   },
   {
     name: "Bing",
@@ -69,7 +68,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "p",
     color: "#6001D2",
     favicon: "https://www.yahoo.com/favicon.ico",
-    keywords: ["yahoo", "busca", "search", "pesquisa", "email", "notícias", "news", "portal"],
+    keywords: ["yahoo", "busca", "search", "pesquisa", "email", "noticias", "news", "portal"],
   },
   {
     name: "DuckDuckGo",
@@ -77,7 +76,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#DE5833",
     favicon: "https://duckduckgo.com/favicon.ico",
-    keywords: ["duckduckgo", "privacidade", "privacy", "anônimo", "sem rastreamento", "duck", "private", "anonymous"],
+    keywords: ["duckduckgo", "privacidade", "privacy", "anonimo", "sem rastreamento", "duck", "private", "anonymous"],
   },
   {
     name: "Yandex",
@@ -95,10 +94,10 @@ export const searchEngines: SearchEngine[] = [
     favicon: "/images/logos/JW_Logo_FaviconNew.png",
     keywords: [
       "jw",
-      "testemunhas de jeová",
-      "bíblia",
-      "religião",
-      "publicações",
+      "testemunhas de jeova",
+      "biblia",
+      "religiao",
+      "publicacoes",
       "watchtower",
       "jehovah",
       "witnesses",
@@ -114,10 +113,10 @@ export const searchEngines: SearchEngine[] = [
     favicon: "/images/logos/wol.jw.org_Logo.ico",
     keywords: [
       "jw",
-      "testemunhas de jeová",
+      "testemunhas de jeova",
       "biblioteca",
       "watchtower",
-      "publicações",
+      "publicacoes",
       "revistas",
       "livros",
       "wol",
@@ -138,7 +137,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "wd",
     color: "#2932E1",
     favicon: "/images/logos/baidu_logo.png",
-    keywords: ["baidu", "china", "chinês", "busca", "search", "internacional", "asiático", "chinese", "asian"],
+    keywords: ["baidu", "china", "chines", "busca", "search", "internacional", "asiatico", "chinese", "asian"],
   },
   {
     name: "Ecosia",
@@ -148,9 +147,9 @@ export const searchEngines: SearchEngine[] = [
     favicon: "https://www.ecosia.org/favicon.ico",
     keywords: [
       "ecosia",
-      "ecológico",
-      "árvores",
-      "sustentável",
+      "ecologico",
+      "arvores",
+      "sustentavel",
       "meio ambiente",
       "eco",
       "trees",
@@ -164,7 +163,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#5C97FF",
     favicon: "https://www.qwant.com/favicon.ico",
-    keywords: ["qwant", "privacidade", "europa", "francês", "privacy", "sem rastreamento", "french", "european"],
+    keywords: ["qwant", "privacidade", "europa", "frances", "privacy", "sem rastreamento", "french", "european"],
   },
   {
     name: "Startpage",
@@ -172,7 +171,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#6573FF",
     favicon: "https://www.startpage.com/favicon.ico",
-    keywords: ["startpage", "privacidade", "google", "anônimo", "privacy", "sem rastreamento", "anonymous", "private"],
+    keywords: ["startpage", "privacidade", "google", "anonimo", "privacy", "sem rastreamento", "anonymous", "private"],
   },
   {
     name: "Ask.com",
@@ -188,7 +187,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#39CFFD",
     favicon: "/images/logos/aol_logo.svg",
-    keywords: ["aol", "america online", "vintage", "clássico", "email", "portal", "classic", "retro"],
+    keywords: ["aol", "america online", "vintage", "classico", "email", "portal", "classic", "retro"],
   },
   {
     name: "Brave Search",
@@ -204,7 +203,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "query",
     color: "#FF0000",
     favicon: "https://swisscows.com/favicon.ico",
-    keywords: ["swisscows", "suíça", "privacidade", "família", "seguro", "sem rastreamento", "swiss", "family safe"],
+    keywords: ["swisscows", "suica", "privacidade", "familia", "seguro", "sem rastreamento", "swiss", "family safe"],
   },
   {
     name: "Mojeek",
@@ -212,7 +211,7 @@ export const searchEngines: SearchEngine[] = [
     queryParam: "q",
     color: "#5A4AE3",
     favicon: "https://www.mojeek.com/favicon.ico",
-    keywords: ["mojeek", "independente", "privacidade", "índice próprio", "uk", "britânico", "independent", "british"],
+    keywords: ["mojeek", "independente", "privacidade", "indice proprio", "uk", "britanico", "independent", "british"],
   },
   {
     name: "Gibiru",
@@ -222,7 +221,7 @@ export const searchEngines: SearchEngine[] = [
     favicon: "/images/logos/gibiru_logo.png",
     keywords: [
       "gibiru",
-      "não censurado",
+      "nao censurado",
       "privacidade",
       "alternativo",
       "uncensored",
@@ -239,10 +238,10 @@ export const searchEngines: SearchEngine[] = [
     favicon: "https://metager.org/favicon.ico",
     keywords: [
       "metager",
-      "alemão",
+      "alemao",
       "privacidade",
       "meta busca",
-      "sustentável",
+      "sustentavel",
       "sem fins lucrativos",
       "german",
       "nonprofit",
@@ -256,7 +255,7 @@ export const searchEngines: SearchEngine[] = [
     favicon: "https://searx.space/favicon.ico",
     keywords: [
       "searx",
-      "código aberto",
+      "codigo aberto",
       "open source",
       "privacidade",
       "meta busca",
@@ -292,7 +291,7 @@ export const searchEngines: SearchEngine[] = [
       "premium",
       "ia",
       "personalizado",
-      "sem anúncios",
+      "sem anuncios",
       "privacidade",
       "ai",
       "ad-free",
@@ -354,11 +353,9 @@ export function useSearchEngine() {
     }
   }
 
-  // Função para construir a URL de pesquisa completa
   const buildSearchUrl = (query: string) => {
     const baseUrl = `${currentEngine.url}?${currentEngine.queryParam}=${encodeURIComponent(query)}`
 
-    // Adicionar parâmetros adicionais se existirem
     if (currentEngine.additionalParams) {
       return `${baseUrl}&${currentEngine.additionalParams}`
     }
