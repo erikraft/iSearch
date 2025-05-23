@@ -78,9 +78,7 @@ export default function MapsMenu({ isOpen, onClose }: MapsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Google Maps</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Navegação, trânsito em tempo real e Street View
-                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("google_maps_description")}</p>
               </div>
             </Link>
 
@@ -94,7 +92,7 @@ export default function MapsMenu({ isOpen, onClose }: MapsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Waze</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Navegação colaborativa e alertas de trânsito</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("waze_description")}</p>
               </div>
             </Link>
 
@@ -114,7 +112,7 @@ export default function MapsMenu({ isOpen, onClose }: MapsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">OpenStreetMap</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Mapa colaborativo e de código aberto</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("openstreetmap_description")}</p>
               </div>
             </Link>
 
@@ -134,7 +132,7 @@ export default function MapsMenu({ isOpen, onClose }: MapsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Bing Maps</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Mapas da Microsoft com vista de pássaro</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("bing_maps_description")}</p>
               </div>
             </Link>
 
@@ -154,7 +152,7 @@ export default function MapsMenu({ isOpen, onClose }: MapsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Apple Maps</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Mapas da Apple com integração iOS</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("apple_maps_description")}</p>
               </div>
             </Link>
           </div>

@@ -78,7 +78,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Google Shopping</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Compare preços em várias lojas</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("google_shopping_description")}</p>
               </div>
             </Link>
 
@@ -98,7 +98,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Amazon</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Maior marketplace do mundo</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("amazon_description")}</p>
               </div>
             </Link>
 
@@ -118,7 +118,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Mercado Livre</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Maior marketplace da América Latina</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("mercado_livre_description")}</p>
               </div>
             </Link>
 
@@ -138,7 +138,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Magalu</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Magazine Luiza - Produtos e ofertas</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("magazine_luiza_description")}</p>
               </div>
             </Link>
 
@@ -158,7 +158,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Shopee</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Produtos com preços acessíveis</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("shopee_description")}</p>
               </div>
             </Link>
 
@@ -178,7 +178,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Americanas</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Variedade de produtos e departamentos</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("americanas_description")}</p>
               </div>
             </Link>
 
@@ -198,7 +198,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Renner</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Moda e acessórios</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("renner_description")}</p>
               </div>
             </Link>
 
@@ -218,7 +218,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Carrefour</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Supermercado e produtos diversos</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("carrefour_description")}</p>
               </div>
             </Link>
 
@@ -238,7 +238,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Extra</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Eletrônicos, eletrodomésticos e mais</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("extra_description")}</p>
               </div>
             </Link>
 
@@ -252,7 +252,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">eBay</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Leilões e produtos novos e usados</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("ebay_description")}</p>
               </div>
             </Link>
 
@@ -272,7 +272,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">AliExpress</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Produtos importados com preços acessíveis</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("aliexpress_description")}</p>
               </div>
             </Link>
 
@@ -303,7 +303,7 @@ export default function ShoppingMenu({ isOpen, onClose }: ShoppingMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Temu</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Produtos importados com preços baixos</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("temu_description")}</p>
               </div>
             </Link>
           </div>

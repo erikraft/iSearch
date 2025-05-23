@@ -13,11 +13,13 @@ interface SearchEngineIconProps {
 export default function SearchEngineIcon({ engine, size = 24, className = "" }: SearchEngineIconProps) {
   const [imageError, setImageError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [currentSrc, setCurrentSrc] = useState(engine.favicon || "")
 
   // Reset error state when engine changes
   useEffect(() => {
     setImageError(false)
     setIsLoading(true)
+    setCurrentSrc(engine.favicon || "")
   }, [engine])
 
   // Fallback to letter icon if no favicon or error loading
@@ -36,18 +38,37 @@ export default function SearchEngineIcon({ engine, size = 24, className = "" }: 
     )
   }
 
+  const handleImageError = () => {
+    // Sistema de fallback para Google e JW.ORG
+    if (engine.name === "Google" && currentSrc.includes("google-logo-new-favicon-perfil.png")) {
+      setCurrentSrc("https://www.google.com/favicon.ico")
+      return
+    }
+
+    if (engine.name === "Google Images" && currentSrc.includes("google-logo-new-favicon-perfil.png")) {
+      setCurrentSrc("https://www.google.com/favicon.ico")
+      return
+    }
+
+    if (engine.name === "JW.ORG" && currentSrc.includes("JW_Logo_FaviconNew.png")) {
+      setCurrentSrc("https://www.jw.org/favicon.ico")
+      return
+    }
+
+    // Se chegou aqui, usar fallback de letra
+    setImageError(true)
+    setIsLoading(false)
+  }
+
   return (
     <div className={`relative ${className}`} style={{ width: size, height: size }}>
       <Image
-        src={engine.favicon || "/placeholder.svg"}
+        src={currentSrc || "/placeholder.svg"}
         alt={`${engine.name} logo`}
         width={size}
         height={size}
         className={`rounded-full ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-200`}
-        onError={() => {
-          setImageError(true)
-          setIsLoading(false)
-        }}
+        onError={handleImageError}
         onLoad={() => setIsLoading(false)}
       />
       {isLoading && (

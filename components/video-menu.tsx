@@ -84,7 +84,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">YouTube</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos, música, streaming e muito mais</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("youtube_description")}</p>
               </div>
             </Link>
 
@@ -113,7 +113,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Instagram</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Reels, stories e vídeos curtos</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("instagram_description")}</p>
               </div>
             </Link>
 
@@ -137,7 +137,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Facebook Watch</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos, lives e séries originais</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("facebook_watch_description")}</p>
               </div>
             </Link>
 
@@ -163,7 +163,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">TikTok</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos curtos e tendências</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("tiktok_description")}</p>
               </div>
             </Link>
 
@@ -189,7 +189,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Kwai</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos curtos e entretenimento</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("kwai_description")}</p>
               </div>
             </Link>
 
@@ -215,7 +215,7 @@ export default function VideoMenu({ isOpen, onClose }: VideoMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Vimeo</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Vídeos profissionais e de alta qualidade</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("vimeo_description")}</p>
               </div>
             </Link>
           </div>

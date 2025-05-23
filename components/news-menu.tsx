@@ -78,7 +78,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Google News</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Notícias personalizadas de várias fontes</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("google_news_description")}</p>
               </div>
             </Link>
 
@@ -98,7 +98,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">BBC News</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Notícias internacionais confiáveis</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("bbc_news_description")}</p>
               </div>
             </Link>
 
@@ -112,7 +112,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">CNN</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Notícias e análises em tempo real</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("cnn_description")}</p>
               </div>
             </Link>
 
@@ -126,7 +126,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Reuters</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Agência de notícias internacional</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("reuters_description")}</p>
               </div>
             </Link>
 
@@ -146,7 +146,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">The Guardian</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Jornalismo independente e investigativo</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("the_guardian_description")}</p>
               </div>
             </Link>
 
@@ -160,7 +160,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">G1</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Portal de notícias da Globo</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("g1_description")}</p>
               </div>
             </Link>
 
@@ -174,7 +174,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">UOL</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Portal de notícias brasileiro</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("uol_description")}</p>
               </div>
             </Link>
 
@@ -194,7 +194,7 @@ export default function NewsMenu({ isOpen, onClose }: NewsMenuProps) {
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-200 text-sm font-medium">Folha de S.Paulo</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Jornal brasileiro de grande circulação</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{t("folha_de_sp_description")}</p>
               </div>
             </Link>
           </div>

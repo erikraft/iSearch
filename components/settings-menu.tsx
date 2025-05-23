@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { FiX, FiCheck, FiRefreshCw, FiSearch } from "react-icons/fi"
 import { useSearchEngine } from "@/hooks/use-search-engine"
 import SearchEngineIcon from "@/components/search-engine-icon"
+import { useTranslation } from "@/lib/i18n"
 
 interface SettingsMenuProps {
   isOpen: boolean
@@ -16,6 +17,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedEngine, setSelectedEngine] = useState<typeof currentEngine | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const { t } = useTranslation()
 
   // Inicializar o mecanismo selecionado com o atual quando o componente é montado
   useEffect(() => {
@@ -160,7 +162,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
         className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl max-w-md w-full max-h-[80vh] overflow-hidden flex flex-col"
       >
         <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-800">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Configurações</h2>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">{t("settings")}</h2>
           <button
             onClick={onClose}
             className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
@@ -178,7 +180,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
             }`}
             onClick={() => setActiveTab("search")}
           >
-            Mecanismo de Pesquisa
+            {t("search_engine")}
           </button>
           <button
             className={`flex-1 py-3 px-4 text-sm font-medium ${
@@ -188,7 +190,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
             }`}
             onClick={() => setActiveTab("appearance")}
           >
-            Aparência
+            {t("appearance")}
           </button>
         </div>
 
@@ -196,13 +198,13 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
           {activeTab === "search" && (
             <div className="p-4">
               <div className="flex justify-between items-center mb-4">
-                <p className="text-sm text-gray-600 dark:text-gray-400">Escolha seu mecanismo de pesquisa preferido:</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t("choose_search_engine")}</p>
                 <button
                   onClick={restoreDefaultEngine}
                   className="flex items-center text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                 >
                   <FiRefreshCw size={12} className="mr-1" />
-                  Restaurar Google
+                  {t("restore_default")}
                 </button>
               </div>
 
@@ -212,7 +214,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
                   <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                   <input
                     type="text"
-                    placeholder="Filtrar mecanismos de pesquisa..."
+                    placeholder={t("filter_search_engines")}
                     className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -233,7 +235,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
                 <SearchEngineIcon engine={googleEngine} size={24} className="mr-3 flex-shrink-0" />
                 <div className="flex flex-col items-start">
                   <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{googleEngine.name}</span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">Mecanismo de pesquisa padrão</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{t("default_search_engine")}</span>
                 </div>
                 {selectedEngine?.name === googleEngine.name && (
                   <FiCheck className="ml-auto text-blue-600 dark:text-blue-400" size={18} />
@@ -256,7 +258,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
                   <SearchEngineIcon engine={gptEngine} size={24} className="mr-3 flex-shrink-0" />
                   <div className="flex flex-col items-start">
                     <span className="text-gray-800 dark:text-gray-200 text-sm font-medium">{gptEngine.name}</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">Pesquisa com IA avançada</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{t("advanced_ai_search")}</span>
                   </div>
                   {selectedEngine?.name === gptEngine.name && (
                     <FiCheck className="ml-auto text-blue-600 dark:text-blue-400" size={18} />
@@ -266,7 +268,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
 
               {/* Contador de mecanismos */}
               <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                {filteredEngines.length} mecanismos de pesquisa disponíveis
+                {filteredEngines.length} {t("search_engines_available")}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -291,7 +293,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
 
               <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
                 <h3 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-                  Mecanismo de pesquisa selecionado
+                  {t("selected_search_engine")}
                 </h3>
                 {selectedEngine && (
                   <div className="flex items-center">
@@ -308,20 +310,16 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
 
           {activeTab === "appearance" && (
             <div className="p-4">
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                Personalize a aparência da sua experiência de pesquisa:
-              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t("customize_appearance")}</p>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-800 dark:text-gray-200">Tema escuro</span>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Use o seletor de tema no cabeçalho para alternar entre temas
-                  </p>
+                  <span className="text-sm text-gray-800 dark:text-gray-200">{t("dark_theme")}</span>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t("use_theme_selector")}</p>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-800 dark:text-gray-200">Animações</span>
+                  <span className="text-sm text-gray-800 dark:text-gray-200">{t("animations")}</span>
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
                     <input type="checkbox" name="animations" id="animations" defaultChecked className="sr-only peer" />
                     <label
@@ -333,7 +331,7 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-800 dark:text-gray-200">Efeitos de vidro</span>
+                  <span className="text-sm text-gray-800 dark:text-gray-200">{t("glass_effects")}</span>
                   <div className="relative inline-block w-10 mr-2 align-middle select-none">
                     <input
                       type="checkbox"
@@ -360,13 +358,13 @@ export default function SettingsMenu({ isOpen, onClose }: SettingsMenuProps) {
             className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center"
           >
             <FiRefreshCw size={16} className="mr-2" />
-            Restaurar padrão
+            {t("restore_default")}
           </button>
           <button
             onClick={saveAndApplyEngine}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors duration-200"
           >
-            Salvar
+            {t("save")}
           </button>
         </div>
       </div>

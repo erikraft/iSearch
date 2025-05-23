@@ -1,9 +1,7 @@
 "use client"
 
 import { useCallback } from "react"
-
 import { useEffect } from "react"
-
 import { useState } from "react"
 
 // Tipos para as traduções
@@ -14,7 +12,7 @@ export const countryToLocale: Record<string, Locale> = {
   // América
   BR: "pt-BR",
   US: "en-US",
-  CA: "en-US", // Canadá (inglês por padrão)
+  CA: "en-US",
   MX: "es-ES",
   AR: "es-ES",
   CL: "es-ES",
@@ -22,20 +20,20 @@ export const countryToLocale: Record<string, Locale> = {
   PE: "es-ES",
 
   // Europa
-  GB: "en-US", // Reino Unido
-  IE: "en-US", // Irlanda
+  GB: "en-US",
+  IE: "en-US",
   FR: "fr-FR",
   DE: "de-DE",
   ES: "es-ES",
   IT: "it-IT",
-  PT: "pt-BR", // Portugal (usando pt-BR por simplicidade)
+  PT: "pt-BR",
   RU: "ru-RU",
 
   // Ásia
   JP: "ja-JP",
   CN: "zh-CN",
-  HK: "zh-CN", // Hong Kong
-  TW: "zh-CN", // Taiwan
+  HK: "zh-CN",
+  TW: "zh-CN",
 
   // Padrão
   DEFAULT: "en-US",
@@ -46,7 +44,7 @@ export function getLocaleFromCountry(countryCode: string): Locale {
   return countryToLocale[countryCode] || countryToLocale.DEFAULT
 }
 
-// Traduções
+// Traduções completas
 export const translations: Record<Locale, Record<string, string>> = {
   "pt-BR": {
     // Geral
@@ -54,6 +52,20 @@ export const translations: Record<Locale, Record<string, string>> = {
     search_in: "Pesquisar no {engine} ou digitar URL",
     search_with_style: "Pesquise com estilo",
     feeling_lucky: "Estou com Sorte",
+    back: "Voltar",
+    forward: "Avançar",
+    reload: "Recarregar",
+    home: "Página inicial",
+    settings: "Configurações",
+    search_engine: "Mecanismo de Pesquisa",
+    appearance: "Aparência",
+    dark_theme: "Tema escuro",
+    animations: "Animações",
+    glass_effects: "Efeitos de vidro",
+    choose_search_engine: "Escolha seu mecanismo de pesquisa preferido",
+    restore_default: "Restaurar padrão",
+    save: "Salvar",
+    select_language: "Selecionar idioma",
 
     // Categorias
     videos: "Vídeos",
@@ -61,40 +73,26 @@ export const translations: Record<Locale, Record<string, string>> = {
     news: "Notícias",
     maps: "Mapas",
 
-    // Navegação
-    back: "Voltar",
-    forward: "Avançar",
-    reload: "Recarregar",
-    home: "Página inicial",
-
     // Menus
     choose_platform: "Escolha uma plataforma para {category}",
-    choose_search_engine: "Escolha seu mecanismo de pesquisa preferido",
-    restore_default: "Restaurar padrão",
-    save: "Salvar",
 
     // Rodapé
     about: "Sobre",
     how_it_works: "Como funciona",
     privacy: "Privacidade",
     terms: "Termos",
-
-    // Configurações
-    settings: "Configurações",
-    search_engine: "Mecanismo de Pesquisa",
-    appearance: "Aparência",
-    dark_theme: "Tema escuro",
-    animations: "Animações",
-    glass_effects: "Efeitos de vidro",
-
-    // Adicionado
-    select_language: "Selecionar idioma",
-
-    // Geral
-    back: "Voltar para a página inicial",
     all_rights_reserved: "Todos os direitos reservados",
     last_updated: "Última atualização",
     may: "de maio de",
+
+    // Configurações avançadas
+    default_search_engine: "Mecanismo de pesquisa padrão",
+    advanced_ai_search: "Pesquisa com IA avançada",
+    search_engines_available: "mecanismos de pesquisa disponíveis",
+    selected_search_engine: "Mecanismo de pesquisa selecionado",
+    filter_search_engines: "Filtrar mecanismos de pesquisa...",
+    customize_appearance: "Personalize a aparência da sua experiência de pesquisa:",
+    use_theme_selector: "Use o seletor de tema no cabeçalho para alternar entre temas",
 
     // Página Sobre
     our_mission: "Nossa Missão",
@@ -126,52 +124,65 @@ export const translations: Record<Locale, Record<string, string>> = {
     feedback_intro:
       "Valorizamos seu feedback e sugestões. Se você tiver ideias sobre como podemos melhorar o iSearch, ou se encontrar algum problema, não hesite em entrar em contato conosco:",
 
-    // Página Como Funciona
+    // Páginas estáticas
     overview: "Visão Geral",
     overview_description:
-      "O iSearch é uma plataforma de busca avançada que permite acessar múltiplos mecanismos de pesquisa através de uma única interface intuitiva. Diferente de outros buscadores, o iSearch não possui um índice próprio, mas funciona como um agregador inteligente que direciona suas consultas para os melhores mecanismos de busca disponíveis.",
+      "O iSearch é uma plataforma de busca avançada que permite acessar múltiplos mecanismos de pesquisa através de uma única interface intuitiva.",
     main_features: "Principais Recursos",
     multiple_search_engines: "Múltiplos Mecanismos de Busca",
     multiple_engines_description:
-      "O iSearch integra-se com mais de 20 mecanismos de busca diferentes, incluindo Google, Bing, DuckDuckGo, Yahoo, Yandex e muitos outros. Você pode escolher seu mecanismo preferido ou alternar entre eles conforme necessário.",
+      "O iSearch integra-se com mais de 20 mecanismos de busca diferentes, incluindo Google, Bing, DuckDuckGo, Yahoo, Yandex e muitos outros.",
     unified_interface: "Interface Unificada",
     unified_interface_description:
-      "Nossa interface limpa e intuitiva oferece uma experiência consistente, independentemente do mecanismo de busca que você escolher. Isso significa que você não precisa se adaptar a diferentes layouts ou aprender novos comandos ao mudar de um mecanismo para outro.",
+      "Nossa interface limpa e intuitiva oferece uma experiência consistente, independentemente do mecanismo de busca que você escolher.",
     tab_system: "Sistema de Guias",
     tab_system_description:
-      "O iSearch permite que você abra múltiplas guias de pesquisa, semelhante a um navegador web. Isso facilita a comparação de resultados de diferentes mecanismos ou a realização de várias pesquisas simultaneamente sem perder o contexto.",
-    advanced_search: "Pesquisa Avançada",
-    advanced_search_intro: "Além da pesquisa por texto, o iSearch suporta:",
-    voice_search: "Pesquisa por Voz",
-    voice_search_description: "Basta clicar no ícone do microfone e falar sua consulta",
-    image_search: "Pesquisa por Imagem",
-    image_search_description: "Faça upload de uma imagem para encontrar conteúdo relacionado",
-    contextual_search: "Pesquisa Contextual",
-    contextual_search_description: "Resultados adaptados com base em suas preferências (se você optar por isso)",
-    specialized_categories: "Categorias Especializadas",
-    categories_intro: "O iSearch oferece acesso rápido a categorias especializadas:",
-    videos_description: "Pesquise em plataformas como YouTube, Instagram, TikTok e outras",
-    shopping_description: "Encontre produtos em diversas lojas online",
-    news_description: "Acesse as últimas notícias de fontes confiáveis",
-    maps_description: "Navegue com Google Maps, Waze ou OpenStreetMap",
-    how_to_use: "Como Usar o iSearch",
-    basic_search: "Pesquisa Básica",
-    basic_search_step1: "Digite sua consulta na barra de pesquisa central",
-    basic_search_step2: "Pressione Enter ou clique no botão de pesquisa",
-    basic_search_step3: "Os resultados serão exibidos no mecanismo de busca selecionado",
-    switch_engines: "Alternar Mecanismos de Busca",
-    switch_engines_step1: "Clique no ícone de configurações",
-    switch_engines_step2: 'Selecione "Configurações"',
-    switch_engines_step3: "Escolha seu mecanismo de busca preferido na lista",
-    manage_tabs: "Gerenciar Guias",
-    manage_tabs_step1: 'Clique no botão "+" na barra de guias para abrir uma nova guia',
-    manage_tabs_step2: "Clique em uma guia para alternar entre elas",
-    manage_tabs_step3: 'Clique no "x" em uma guia para fechá-la',
-    privacy_statement:
-      "O iSearch foi projetado com privacidade em mente. Não armazenamos seu histórico de pesquisa em nossos servidores, e todas as consultas são enviadas diretamente para o mecanismo de busca selecionado. Para mais informações, consulte nossa",
-    feedback_support: "Feedback e Suporte",
-    feedback_description:
-      "Estamos sempre buscando melhorar o iSearch. Se você tiver sugestões, encontrar bugs ou precisar de ajuda, entre em contato conosco em erikraft43@gmail.com.",
+      "O iSearch permite que você abra múltiplas guias de pesquisa, semelhante a um navegador web.",
+
+    // Página Termos
+    terms_acceptance: "Aceitação dos Termos",
+    welcome_terms:
+      "Bem-vindo ao iSearch. Ao acessar ou usar nosso serviço de busca, você concorda em ficar vinculado a estes Termos de Uso. Se você não concordar com estes termos, por favor, não use nosso serviço.",
+    service_description: "Descrição do Serviço",
+    service_description_text:
+      "O iSearch é um serviço de busca que permite aos usuários pesquisar informações na internet através de diversos mecanismos de busca. Nosso serviço inclui recursos como pesquisa por texto, imagem e voz, além de acesso a diferentes categorias de conteúdo.",
+    service_use: "Uso do Serviço",
+    legal_use:
+      "Você concorda em usar o serviço apenas para fins legais e de acordo com estes Termos. Especificamente, você concorda em não:",
+    illegal_use: "Usar o serviço para qualquer finalidade ilegal ou proibida por estes Termos",
+    unauthorized_access: "Tentar acessar áreas do serviço às quais você não está autorizado",
+    service_interference: "Interferir ou interromper o funcionamento do serviço",
+    security_bypass: "Tentar contornar medidas de segurança ou autenticação",
+    malware_distribution: "Usar o serviço para distribuir malware, spam ou conteúdo prejudicial",
+    user_info_collection: "Coletar informações de outros usuários sem seu consentimento",
+    user_accounts: "Contas de Usuário",
+    account_responsibility:
+      "Alguns recursos do serviço podem exigir que você crie uma conta. Você é responsável por manter a confidencialidade de suas credenciais de conta e por todas as atividades que ocorrem sob sua conta. Você concorda em notificar-nos imediatamente sobre qualquer uso não autorizado de sua conta.",
+    intellectual_property: "Propriedade Intelectual",
+    ip_ownership:
+      "O serviço e seu conteúdo original, recursos e funcionalidades são e permanecerão propriedade exclusiva do iSearch e seus licenciadores. O serviço é protegido por direitos autorais, marcas registradas e outras leis de propriedade intelectual.",
+    no_copy:
+      "Você não pode copiar, modificar, distribuir, vender ou alugar qualquer parte do serviço sem nossa permissão expressa por escrito.",
+    third_party_content: "Conteúdo de Terceiros",
+    third_party_disclaimer:
+      "O serviço pode conter links para sites de terceiros, anúncios, serviços ou recursos que não são de propriedade ou controlados pelo iSearch. Não temos controle sobre, e não assumimos responsabilidade pelo conteúdo, políticas de privacidade ou práticas de quaisquer sites ou serviços de terceiros.",
+    warranty_disclaimer: "Isenção de Garantias",
+    as_is_service:
+      'O serviço é fornecido "como está" e "conforme disponível", sem garantias de qualquer tipo, expressas ou implícitas. Não garantimos que o serviço atenderá aos seus requisitos, será ininterrupto, oportuno, seguro ou livre de erros.',
+    liability_limitation: "Limitação de Responsabilidade",
+    no_liability:
+      "Em nenhuma circunstância o iSearch, seus diretores, funcionários, parceiros, agentes, fornecedores ou afiliados serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes de:",
+    access_inability: "Seu acesso ou uso ou incapacidade de acessar ou usar o serviço",
+    third_party_conduct: "Qualquer conduta ou conteúdo de terceiros no serviço",
+    content_obtained: "Conteúdo obtido através do serviço",
+    unauthorized_access_use: "Acesso não autorizado, uso ou alteração de suas transmissões ou conteúdo",
+    terms_changes: "Alterações nos Termos",
+    modify_terms:
+      "Reservamo-nos o direito de modificar ou substituir estes Termos a qualquer momento. Se uma revisão for material, tentaremos fornecer um aviso com pelo menos 30 dias de antecedência antes que quaisquer novos termos entrem em vigor. O que constitui uma alteração material será determinado a nosso critério.",
+    applicable_law: "Lei Aplicável",
+    governing_law:
+      "Estes Termos serão regidos e interpretados de acordo com as leis do Brasil, sem considerar suas disposições sobre conflitos de leis.",
+    terms_questions: "Se você tiver dúvidas sobre estes Termos, entre em contato conosco em:",
 
     // Página Privacidade
     introduction: "Introdução",
@@ -226,582 +237,387 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact: "Contato",
     questions_concerns:
       "Se você tiver dúvidas, preocupações ou solicitações relacionadas a esta política ou às suas informações, entre em contato conosco em:",
-
-    // Página Termos
-    terms_acceptance: "Aceitação dos Termos",
-    welcome_terms:
-      "Bem-vindo ao iSearch. Ao acessar ou usar nosso serviço de busca, você concorda em ficar vinculado a estes Termos de Uso. Se você não concordar com estes termos, por favor, não use nosso serviço.",
-    service_description: "Descrição do Serviço",
-    service_description_text:
-      "O iSearch é um serviço de busca que permite aos usuários pesquisar informações na internet através de diversos mecanismos de busca. Nosso serviço inclui recursos como pesquisa por texto, imagem e voz, além de acesso a diferentes categorias de conteúdo.",
-    service_use: "Uso do Serviço",
-    legal_use:
-      "Você concorda em usar o serviço apenas para fins legais e de acordo com estes Termos. Especificamente, você concorda em não:",
-    illegal_use: "Usar o serviço para qualquer finalidade ilegal ou proibida por estes Termos",
-    unauthorized_access: "Tentar acessar áreas do serviço às quais você não está autorizado",
-    service_interference: "Interferir ou interromper o funcionamento do serviço",
-    security_bypass: "Tentar contornar medidas de segurança ou autenticação",
-    malware_distribution: "Usar o serviço para distribuir malware, spam ou conteúdo prejudicial",
-    user_info_collection: "Coletar informações de outros usuários sem seu consentimento",
-    user_accounts: "Contas de Usuário",
-    account_responsibility:
-      "Alguns recursos do serviço podem exigir que você crie uma conta. Você é responsável por manter a confidencialidade de suas credenciais de conta e por todas as atividades que ocorrem sob sua conta. Você concorda em notificar-nos imediatamente sobre qualquer uso não autorizado de sua conta.",
-    intellectual_property: "Propriedade Intelectual",
-    ip_ownership:
-      "O serviço e seu conteúdo original, recursos e funcionalidades são e permanecerão propriedade exclusiva do iSearch e seus licenciadores. O serviço é protegido por direitos autorais, marcas registradas e outras leis de propriedade intelectual.",
-    no_copy:
-      "Você não pode copiar, modificar, distribuir, vender ou alugar qualquer parte do serviço sem nossa permissão expressa por escrito.",
-    third_party_content: "Conteúdo de Terceiros",
-    third_party_disclaimer:
-      "O serviço pode conter links para sites de terceiros, anúncios, serviços ou recursos que não são de propriedade ou controlados pelo iSearch. Não temos controle sobre, e não assumimos responsabilidade pelo conteúdo, políticas de privacidade ou práticas de quaisquer sites ou serviços de terceiros.",
-    warranty_disclaimer: "Isenção de Garantias",
-    as_is_service:
-      'O serviço é fornecido "como está" e "conforme disponível", sem garantias de qualquer tipo, expressas ou implícitas. Não garantimos que o serviço atenderá aos seus requisitos, será ininterrupto, oportuno, seguro ou livre de erros.',
-    liability_limitation: "Limitação de Responsabilidade",
-    no_liability:
-      "Em nenhuma circunstância o iSearch, seus diretores, funcionários, parceiros, agentes, fornecedores ou afiliados serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes de:",
-    access_inability: "Seu acesso ou uso ou incapacidade de acessar ou usar o serviço",
-    third_party_conduct: "Qualquer conduta ou conteúdo de terceiros no serviço",
-    content_obtained: "Conteúdo obtido através do serviço",
-    unauthorized_access_use: "Acesso não autorizado, uso ou alteração de suas transmissões ou conteúdo",
-    terms_changes: "Alterações nos Termos",
-    modify_terms:
-      "Reservamo-nos o direito de modificar ou substituir estes Termos a qualquer momento. Se uma revisão for material, tentaremos fornecer um aviso com pelo menos 30 dias de antecedência antes que quaisquer novos termos entrem em vigor. O que constitui uma alteração material será determinado a nosso critério.",
-    applicable_law: "Lei Aplicável",
-    governing_law:
-      "Estes Termos serão regidos e interpretados de acordo com as leis do Brasil, sem considerar suas disposições sobre conflitos de leis.",
-    terms_questions: "Se você tiver dúvidas sobre estes Termos, entre em contato conosco em:",
-  },
-
-  "en-US": {
-    // General
-    search: "Search",
-    search_in: "Search on {engine} or type URL",
-    search_with_style: "Search with style",
-    feeling_lucky: "I'm Feeling Lucky",
-
-    // Categories
-    videos: "Videos",
-    shopping: "Shopping",
-    news: "News",
-    maps: "Maps",
-
-    // Navigation
-    back: "Back",
-    forward: "Forward",
-    reload: "Reload",
-    home: "Home",
-
-    // Menus
-    choose_platform: "Choose a platform for {category}",
-    choose_search_engine: "Choose your preferred search engine",
-    restore_default: "Restore default",
-    save: "Save",
-
-    // Footer
-    about: "About",
-    how_it_works: "How it works",
-    privacy: "Privacy",
-    terms: "Terms",
-
-    // Settings
-    settings: "Settings",
-    search_engine: "Search Engine",
-    appearance: "Appearance",
-    dark_theme: "Dark theme",
-    animations: "Animations",
-    glass_effects: "Glass effects",
-
-    // Adicionado
-    select_language: "Select language",
-
-    // Geral
-    back: "Back to home page",
-    all_rights_reserved: "All rights reserved",
-    last_updated: "Last updated",
-    may: "May",
-
-    // Página Sobre
-    our_mission: "Our Mission",
-    mission_description:
-      "iSearch was created with a simple mission: to make internet search more efficient, personalized, and accessible to everyone. We believe that information should be within everyone's reach, and our goal is to provide a platform that connects people to knowledge quickly and intuitively.",
-    who_we_are: "Who We Are",
-    team_description:
-      "We are a team of technology enthusiasts, developers, and designers passionate about creating exceptional digital experiences. iSearch was born from our frustration with the limitations of traditional search engines and the desire to offer an alternative that puts the user first.",
-    our_approach: "Our Approach",
-    approach_description:
-      "Unlike other search engines, iSearch is not tied to a single algorithm or data source. Our platform integrates multiple search engines, allowing you to choose the source that best meets your needs. We believe this approach offers more comprehensive and unbiased results.",
-    privacy_transparency: "Privacy and Transparency",
-    privacy_description:
-      "We deeply respect your privacy. We don't track your search history to sell data to advertisers, nor do we create detailed profiles of our users. We believe you should have complete control over your personal information and be able to browse the web without compromising your privacy.",
-    privacy_more_info: "To learn more about how we handle your data, see our",
-    exclusive_features: "Exclusive Features",
-    features_intro: "iSearch offers a series of exclusive features designed to enhance your search experience:",
-    feature_multiple_engines: "Integration with multiple search engines",
-    feature_clean_interface: "Clean and intuitive interface",
-    feature_voice_image: "Support for voice and image search",
-    feature_themes: "Customizable themes",
-    feature_tabs: "Integrated tab system",
-    feature_quick_access: "Quick access to videos, news, maps, and shopping",
-    our_commitment: "Our Commitment",
-    commitment_description:
-      "We are committed to continuously improving iSearch based on user feedback. We believe that the best way to create an exceptional product is to listen carefully to the people who use it every day.",
-    contact_us: "Contact Us",
-    feedback_intro:
-      "We value your feedback and suggestions. If you have ideas on how we can improve iSearch, or if you encounter any issues, don't hesitate to contact us:",
-
-    // Página Como Funciona
-    overview: "Overview",
-    overview_description:
-      "iSearch is an advanced search platform that allows you to access multiple search engines through a single intuitive interface. Unlike other search engines, iSearch doesn't have its own index but functions as an intelligent aggregator that directs your queries to the best available search engines.",
-    main_features: "Main Features",
-    multiple_search_engines: "Multiple Search Engines",
-    multiple_engines_description:
-      "iSearch integrates with more than 20 different search engines, including Google, Bing, DuckDuckGo, Yahoo, Yandex, and many others. You can choose your preferred engine or switch between them as needed.",
-    unified_interface: "Unified Interface",
-    unified_interface_description:
-      "Our clean and intuitive interface offers a consistent experience, regardless of which search engine you choose. This means you don't need to adapt to different layouts or learn new commands when switching from one engine to another.",
-    tab_system: "Tab System",
-    tab_system_description:
-      "iSearch allows you to open multiple search tabs, similar to a web browser. This makes it easy to compare results from different engines or perform multiple searches simultaneously without losing context.",
-    advanced_search: "Advanced Search",
-    advanced_search_intro: "In addition to text search, iSearch supports:",
-    voice_search: "Voice Search",
-    voice_search_description: "Just click on the microphone icon and speak your query",
-    image_search: "Image Search",
-    image_search_description: "Upload an image to find related content",
-    contextual_search: "Contextual Search",
-    contextual_search_description: "Results adapted based on your preferences (if you opt in)",
-    specialized_categories: "Specialized Categories",
-    categories_intro: "iSearch offers quick access to specialized categories:",
-    videos_description: "Search on platforms like YouTube, Instagram, TikTok, and others",
-    shopping_description: "Find products in various online stores",
-    news_description: "Access the latest news from reliable sources",
-    maps_description: "Navigate with Google Maps, Waze, or OpenStreetMap",
-    how_to_use: "How to Use iSearch",
-    basic_search: "Basic Search",
-    basic_search_step1: "Type your query in the central search bar",
-    basic_search_step2: "Press Enter or click the search button",
-    basic_search_step3: "Results will be displayed in the selected search engine",
-    switch_engines: "Switch Search Engines",
-    switch_engines_step1: "Click on the settings icon",
-    switch_engines_step2: 'Select "Settings"',
-    switch_engines_step3: "Choose your preferred search engine from the list",
-    manage_tabs: "Manage Tabs",
-    manage_tabs_step1: 'Click the "+" button in the tab bar to open a new tab',
-    manage_tabs_step2: "Click on a tab to switch between them",
-    manage_tabs_step3: 'Click the "x" on a tab to close it',
-    privacy_statement:
-      "iSearch was designed with privacy in mind. We don't store your search history on our servers, and all queries are sent directly to the selected search engine. For more information, see our",
-    feedback_support: "Feedback and Support",
-    feedback_description:
-      "We're always looking to improve iSearch. If you have suggestions, find bugs, or need help, contact us at erikraft43@gmail.com.",
-
-    // Página Privacidade
-    introduction: "Introduction",
-    privacy_welcome:
-      "Welcome to iSearch's Privacy Policy. This policy describes how we collect, use, process, and share your information when you use our search service.",
-    privacy_value:
-      "We value your privacy and are committed to protecting your personal information. Please read this policy carefully to understand our practices regarding your data.",
-    information_collect: "Information We Collect",
-    information_provide: "Information you provide to us",
-    information_provide_description:
-      "When you use iSearch, we may collect information that you provide directly, such as search terms, configuration preferences, and account information if you choose to create one.",
-    information_automatic: "Information collected automatically",
-    information_automatic_description:
-      "We automatically collect certain information when you use our service, including:",
-    usage_info: "Usage information, such as search terms, pages visited, and time spent on the service",
-    device_info: "Device information, such as browser type, operating system, and language settings",
-    location_info: "Approximate location information based on your IP address",
-    cookies_info: "Cookies and similar technologies to improve your experience",
-    how_use_information: "How We Use Your Information",
-    use_information_intro: "We use the collected information to",
-    provide_service: "Provide, maintain, and improve our search service",
-    personalize_experience: "Personalize your experience based on your preferences",
-    develop_features: "Develop new features and functionalities",
-    protect_security: "Protect the security and integrity of the service",
-    legal_obligations: "Comply with legal obligations",
-    information_sharing: "Information Sharing",
-    not_sell_info:
-      "We do not sell your personal information. We may share your information in the following circumstances:",
-    service_providers: "With third-party service providers that help us operate the service",
-    legal_requirements: "To comply with legal obligations, such as responding to subpoenas or court orders",
-    protect_rights: "To protect our rights, property, or safety, or that of our users",
-    business_transfers: "In connection with a merger, acquisition, or sale of assets, with prior notice",
-    your_choices: "Your Choices and Rights",
-    rights_intro: "You have certain rights and choices regarding your information",
-    access_correct: "Access, correct, or delete your personal information",
-    opt_out: "Opt out of marketing communications",
-    disable_cookies: "Disable cookies through your browser settings",
-    data_portability: "Request portability of your data",
-    exercise_rights: "To exercise these rights, contact us using the information provided below.",
-    data_security: "Data Security",
-    security_measures:
-      "We implement technical and organizational security measures to protect your information against unauthorized access, loss, or alteration. However, no system is completely secure, and we cannot guarantee the absolute security of your information.",
-    data_retention: "Data Retention",
-    retention_policy:
-      "We keep your information for as long as necessary to provide the service and comply with our legal obligations. When we no longer need your information, we will delete it or anonymize it.",
-    children: "Children",
-    children_policy:
-      "Our service is not directed at children under 13 years of age, and we do not knowingly collect personal information from children. If we discover that we have collected information from a child, we will take steps to delete it.",
-    policy_changes: "Changes to This Policy",
-    update_policy:
-      "We may update this policy periodically to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes through our website or by other means.",
-    contact: "Contact",
-    questions_concerns:
-      "If you have questions, concerns, or requests related to this policy or your information, contact us at:",
-
-    // Página Termos
-    terms_acceptance: "Acceptance of Terms",
-    welcome_terms:
-      "Welcome to iSearch. By accessing or using our search service, you agree to be bound by these Terms of Use. If you do not agree with these terms, please do not use our service.",
-    service_description: "Service Description",
-    service_description_text:
-      "iSearch is a search service that allows users to search for information on the internet through various search engines. Our service includes features such as text, image, and voice search, as well as access to different content categories.",
-    service_use: "Service Use",
-    legal_use:
-      "You agree to use the service only for legal purposes and in accordance with these Terms. Specifically, you agree not to:",
-    illegal_use: "Use the service for any illegal purpose or prohibited by these Terms",
-    unauthorized_access: "Attempt to access areas of the service to which you are not authorized",
-    service_interference: "Interfere with or disrupt the operation of the service",
-    security_bypass: "Attempt to circumvent security or authentication measures",
-    malware_distribution: "Use the service to distribute malware, spam, or harmful content",
-    user_info_collection: "Collect information from other users without their consent",
-    user_accounts: "User Accounts",
-    account_responsibility:
-      "Some features of the service may require you to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.",
-    intellectual_property: "Intellectual Property",
-    ip_ownership:
-      "The service and its original content, features, and functionalities are and will remain the exclusive property of iSearch and its licensors. The service is protected by copyright, trademark, and other intellectual property laws.",
-    no_copy:
-      "You may not copy, modify, distribute, sell, or rent any part of the service without our express written permission.",
-    third_party_content: "Third-Party Content",
-    third_party_disclaimer:
-      "The service may contain links to third-party websites, advertisements, services, or resources that are not owned or controlled by iSearch. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.",
-    warranty_disclaimer: "Disclaimer of Warranties",
-    as_is_service:
-      'The service is provided "as is" and "as available," without warranties of any kind, express or implied. We do not guarantee that the service will meet your requirements, be uninterrupted, timely, secure, or error-free.',
-    liability_limitation: "Limitation of Liability",
-    no_liability:
-      "In no event shall iSearch, its directors, employees, partners, agents, suppliers, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:",
-    access_inability: "Your access or use or inability to access or use the service",
-    third_party_conduct: "Any conduct or content of third parties on the service",
-    content_obtained: "Content obtained through the service",
-    unauthorized_access_use: "Unauthorized access, use, or alteration of your transmissions or content",
-    terms_changes: "Changes to Terms",
-    modify_terms:
-      "We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice before any new terms take effect. What constitutes a material change will be determined at our sole discretion.",
-    applicable_law: "Applicable Law",
-    governing_law:
-      "These Terms shall be governed and construed in accordance with the laws of Brazil, without regard to its conflict of law provisions.",
-    terms_questions: "If you have any questions about these Terms, please contact us at:",
-  },
-
-  "es-ES": {
-    // General
-    search: "Buscar",
-    search_in: "Buscar en {engine} o escribir URL",
-    search_with_style: "Busca con estilo",
-    feeling_lucky: "Voy a tener suerte",
-
-    // Categories
-    videos: "Videos",
-    shopping: "Compras",
-    news: "Noticias",
-    maps: "Mapas",
-
-    // Navigation
-    back: "Atrás",
-    forward: "Adelante",
-    reload: "Recargar",
-    home: "Inicio",
-
-    // Menus
-    choose_platform: "Elige una plataforma para {category}",
-    choose_search_engine: "Elige tu motor de búsqueda preferido",
-    restore_default: "Restaurar predeterminado",
-    save: "Guardar",
-
-    // Footer
-    about: "Acerca de",
-    how_it_works: "Cómo funciona",
-    privacy: "Privacidad",
-    terms: "Términos",
-
-    // Settings
-    settings: "Configuración",
-    search_engine: "Motor de búsqueda",
-    appearance: "Apariencia",
-    dark_theme: "Tema oscuro",
-    animations: "Animaciones",
-    glass_effects: "Efectos de cristal",
-
-    // Adicionado
-    select_language: "Seleccionar idioma",
-  },
-
-  "fr-FR": {
-    // General
-    search: "Rechercher",
-    search_in: "Rechercher sur {engine} ou saisir une URL",
-    search_with_style: "Recherchez avec style",
-    feeling_lucky: "J'ai de la chance",
-
-    // Categories
-    videos: "Vidéos",
-    shopping: "Shopping",
-    news: "Actualités",
-    maps: "Cartes",
-
-    // Navigation
-    back: "Retour",
-    forward: "Avancer",
-    reload: "Actualiser",
-    home: "Accueil",
-
-    // Menus
-    choose_platform: "Choisissez une plateforme pour {category}",
-    choose_search_engine: "Choisissez votre moteur de recherche préféré",
-    restore_default: "Restaurer par défaut",
-    save: "Enregistrer",
-
-    // Footer
-    about: "À propos",
-    how_it_works: "Comment ça marche",
-    privacy: "Confidentialité",
-    terms: "Conditions",
-
-    // Settings
-    settings: "Paramètres",
-    search_engine: "Moteur de recherche",
-    appearance: "Apparence",
-    dark_theme: "Thème sombre",
-    animations: "Animations",
-    glass_effects: "Effets de verre",
-
-    // Adicionado
-    select_language: "Sélectionner la langue",
-  },
-
-  "de-DE": {
-    // General
-    search: "Suchen",
-    search_in: "Suche auf {engine} oder URL eingeben",
-    search_with_style: "Suchen Sie mit Stil",
-    feeling_lucky: "Auf gut Glück!",
-
-    // Categories
-    videos: "Videos",
-    shopping: "Shopping",
-    news: "Nachrichten",
-    maps: "Karten",
-
-    // Navigation
-    back: "Zurück",
-    forward: "Vorwärts",
-    reload: "Neu laden",
-    home: "Startseite",
-
-    // Menus
-    choose_platform: "Wählen Sie eine Plattform für {category}",
-    choose_search_engine: "Wählen Sie Ihre bevorzugte Suchmaschine",
-    restore_default: "Standard wiederherstellen",
-    save: "Speichern",
-
-    // Footer
-    about: "Über uns",
-    how_it_works: "Wie es funktioniert",
-    privacy: "Datenschutz",
-    terms: "Nutzungsbedingungen",
-
-    // Settings
-    settings: "Einstellungen",
-    search_engine: "Suchmaschine",
-    appearance: "Erscheinungsbild",
-    dark_theme: "Dunkles Thema",
-    animations: "Animationen",
-    glass_effects: "Glaseffekte",
-
-    // Adicionado
-    select_language: "Sprache auswählen",
-  },
-
-  "it-IT": {
-    // General
-    search: "Cerca",
-    search_in: "Cerca su {engine} o digita URL",
-    search_with_style: "Cerca con stile",
-    feeling_lucky: "Mi sento fortunato",
-
-    // Categories
-    videos: "Video",
-    shopping: "Shopping",
-    news: "Notizie",
-    maps: "Mappe",
-
-    // Navigation
-    back: "Indietro",
-    forward: "Avanti",
-    reload: "Ricarica",
-    home: "Home",
-
-    // Menus
-    choose_platform: "Scegli una piattaforma per {category}",
-    choose_search_engine: "Scegli il tuo motore di ricerca preferito",
-    restore_default: "Ripristina predefinito",
-    save: "Salva",
-
-    // Footer
-    about: "Chi siamo",
-    how_it_works: "Come funziona",
-    privacy: "Privacy",
-    terms: "Termini",
-
-    // Settings
-    settings: "Impostazioni",
-    search_engine: "Motore di ricerca",
-    appearance: "Aspetto",
-    dark_theme: "Tema scuro",
-    animations: "Animazioni",
-    glass_effects: "Effetti vetro",
-
-    // Adicionado
-    select_language: "Seleziona lingua",
-  },
-
-  "ja-JP": {
-    // General
-    search: "検索",
-    search_in: "{engine}で検索またはURLを入力",
-    search_with_style: "スタイリッシュに検索",
-    feeling_lucky: "I'm Feeling Lucky",
-
-    // Categories
-    videos: "動画",
-    shopping: "ショッピング",
-    news: "ニュース",
-    maps: "地図",
-
-    // Navigation
-    back: "戻る",
-    forward: "進む",
-    reload: "更新",
-    home: "ホーム",
-
-    // Menus
-    choose_platform: "{category}のプラットフォームを選択",
-    choose_search_engine: "検索エンジンを選択",
-    restore_default: "デフォルトに戻す",
-    save: "保存",
-
-    // Footer
-    about: "概要",
-    how_it_works: "仕組み",
-    privacy: "プライバシー",
-    terms: "利用規約",
-
-    // Settings
-    settings: "設定",
-    search_engine: "検索エンジン",
-    appearance: "外観",
-    dark_theme: "ダークテーマ",
-    animations: "アニメーション",
-    glass_effects: "ガラス効果",
-
-    // Adicionado
-    select_language: "言語を選択",
   },
 
   "zh-CN": {
-    // General
+    // Geral
     search: "搜索",
     search_in: "在{engine}上搜索或输入网址",
     search_with_style: "时尚搜索",
     feeling_lucky: "手气不错",
-
-    // Categories
-    videos: "视频",
-    shopping: "购物",
-    news: "新闻",
-    maps: "地图",
-
-    // Navigation
-    back: "后退",
+    back: "返回",
     forward: "前进",
     reload: "刷新",
     home: "首页",
-
-    // Menus
-    choose_platform: "选择{category}平台",
-    choose_search_engine: "选择您喜欢的搜索引擎",
-    restore_default: "恢复默认",
-    save: "保存",
-
-    // Footer
-    about: "关于",
-    how_it_works: "工作原理",
-    privacy: "隐私",
-    terms: "条款",
-
-    // Settings
     settings: "设置",
     search_engine: "搜索引擎",
     appearance: "外观",
     dark_theme: "深色主题",
     animations: "动画",
     glass_effects: "玻璃效果",
-
-    // Adicionado
+    choose_search_engine: "选择您喜欢的搜索引擎",
+    restore_default: "恢复默认",
+    save: "保存",
     select_language: "选择语言",
+
+    // Categorias
+    videos: "视频",
+    shopping: "购物",
+    news: "新闻",
+    maps: "地图",
+
+    // Menus
+    choose_platform: "选择{category}平台",
+
+    // Rodapé
+    about: "关于",
+    how_it_works: "工作原理",
+    privacy: "隐私",
+    terms: "条款",
+    all_rights_reserved: "版权所有",
+    last_updated: "最后更新",
+    may: "五月",
+
+    // Configurações avançadas
+    default_search_engine: "默认搜索引擎",
+    advanced_ai_search: "高级人工智能搜索",
+    search_engines_available: "可用的搜索引擎",
+    selected_search_engine: "选定的搜索引擎",
+    filter_search_engines: "筛选搜索引擎...",
+    customize_appearance: "自定义您的搜索体验的外观:",
+    use_theme_selector: "使用标题中的主题选择器来切换主题",
+
+    // Página Sobre
+    our_mission: "我们的使命",
+    mission_description:
+      "iSearch的创建使命很简单：让互联网搜索更高效、更个性化、更易于所有人使用。我们相信信息应该触手可及，我们的目标是提供一个平台，以快速直观的方式将人们与知识连接起来。",
+    who_we_are: "我们是谁",
+    team_description:
+      "我们是一群热爱技术的爱好者、开发人员和设计师，热衷于创造卓越的数字体验。iSearch诞生于我们对传统搜索引擎局限性的挫折，以及提供以用户为中心的替代方案的愿望。",
+    our_approach: "我们的方法",
+    approach_description:
+      "与其他搜索引擎不同，iSearch不受单一算法或数据源的限制。我们的平台集成了多个搜索引擎，让您可以选择最能满足您需求的来源。我们相信这种方法提供了更全面、更公正的结果。",
+    privacy_transparency: "隐私和透明度",
+    privacy_description:
+      "我们深深尊重您的隐私。我们不会跟踪您的搜索历史来向广告商出售数据，也不会创建用户的详细资料。我们相信您应该完全控制您的个人信息，并能够在不损害隐私的情况下浏览网络。",
+    privacy_more_info: "要了解更多关于我们如何处理您的数据，请参阅我们的",
+    exclusive_features: "独家功能",
+    features_intro: "iSearch提供了一系列旨在增强您的搜索体验的独家功能：",
+    feature_multiple_engines: "与多个搜索引擎集成",
+    feature_clean_interface: "清晰直观的界面",
+    feature_voice_image: "支持语音和图像搜索",
+    feature_themes: "可定制的主题",
+    feature_tabs: "集成标签系统",
+    feature_quick_access: "快速访问视频、新闻、地图和购物",
+    our_commitment: "我们的承诺",
+    commitment_description:
+      "我们致力于根据用户反馈不断改进iSearch。我们相信，创造卓越产品的最佳方式是认真倾听每天使用它的人们的意见。",
+    contact_us: "联系我们",
+    feedback_intro: "我们重视您的反馈和建议。如果您有关于如何改进iSearch的想法，或者遇到任何问题，请随时联系我们：",
+
+    // Páginas estáticas
+    overview: "概述",
+    overview_description: "iSearch是一个先进的搜索平台，允许您通过单一直观界面访问多个搜索引擎。",
+    main_features: "主要功能",
+    multiple_search_engines: "多个搜索引擎",
+    multiple_engines_description: "iSearch与20多个不同的搜索引擎集成，包括Google、Bing、DuckDuckGo、Yahoo、Yandex等。",
+    unified_interface: "统一界面",
+    unified_interface_description: "我们干净直观的界面提供一致的体验，无论您选择哪个搜索引擎。",
+    tab_system: "标签系统",
+    tab_system_description: "iSearch允许您打开多个搜索标签，类似于网络浏览器。",
+
+    // Página Termos
+    terms_acceptance: "接受条款",
+    welcome_terms:
+      "欢迎使用iSearch。通过访问或使用我们的搜索服务，您同意受这些使用条款的约束。如果您不同意这些条款，请不要使用我们的服务。",
+    service_description: "服务描述",
+    service_description_text:
+      "iSearch是一项搜索服务，允许用户通过各种搜索引擎在互联网上搜索信息。我们的服务包括文本、图像和语音搜索等功能，以及访问不同内容类别的功能。",
+    service_use: "服务使用",
+    legal_use: "您同意仅将服务用于合法目的，并按照这些条款使用。具体来说，您同意不：",
+    illegal_use: "将服务用于这些条款禁止的任何非法目的",
+    unauthorized_access: "尝试访问您未获授权的服务区域",
+    service_interference: "干扰或中断服务的运行",
+    security_bypass: "尝试绕过安全或认证措施",
+    malware_distribution: "使用服务分发恶意软件、垃圾邮件或有害内容",
+    user_info_collection: "未经同意收集其他用户的信息",
+    user_accounts: "用户账户",
+    account_responsibility:
+      "服务的某些功能可能需要您创建账户。您负责维护账户凭证的机密性，以及在您账户下发生的所有活动。您同意立即通知我们任何未经授权使用您账户的情况。",
+    intellectual_property: "知识产权",
+    ip_ownership:
+      "服务及其原创内容、功能和特性是并将继续是iSearch及其许可方的专有财产。该服务受版权、商标和其他知识产权法律的保护。",
+    no_copy: "未经我们明确书面许可，您不得复制、修改、分发、出售或出租服务的任何部分。",
+    third_party_content: "第三方内容",
+    third_party_disclaimer:
+      "服务可能包含非iSearch拥有或控制的第三方网站、广告、服务或资源的链接。我们对任何第三方网站或服务的内容、隐私政策或做法没有控制权，也不承担责任。",
+    warranty_disclaimer: "免责声明",
+    as_is_service:
+      '服务按"原样"和"可用"提供，不提供任何明示或暗示的保证。我们不保证服务将满足您的要求，不间断、及时、安全或无错误。',
+    liability_limitation: "责任限制",
+    no_liability:
+      "在任何情况下，iSearch及其董事、员工、合作伙伴、代理商、供应商或附属机构均不对任何间接、偶然、特殊、后果性或惩罚性损害负责，包括但不限于利润、数据、使用、商誉或其他无形损失，这些损失源于：",
+    access_inability: "您访问或使用或无法访问或使用服务",
+    third_party_conduct: "服务上第三方的任何行为或内容",
+    content_obtained: "通过服务获得的内容",
+    unauthorized_access_use: "未经授权访问、使用或更改您的传输或内容",
+    terms_changes: "条款变更",
+    modify_terms:
+      "我们保留随时修改或替换这些条款的权利。如果修订是重大的，我们将尝试在任何新条款生效前至少提前30天通知。什么构成重大变更将由我们自行决定。",
+    applicable_law: "适用法律",
+    governing_law: "这些条款将受巴西法律管辖并按其解释，不考虑其冲突法规定。",
+    terms_questions: "如果您对这些条款有任何疑问，请通过以下方式联系我们：",
+
+    // Página Privacidade
+    introduction: "介绍",
+    privacy_welcome:
+      "欢迎阅读iSearch的隐私政策。本政策描述了当您使用我们的搜索服务时，我们如何收集、使用、处理和共享您的信息。",
+    privacy_value: "我们重视您的隐私，并致力于保护您的个人信息。请仔细阅读本政策，了解我们关于您数据的做法。",
+    information_collect: "我们收集的信息",
+    information_provide: "您提供给我们的信息",
+    information_provide_description:
+      "当您使用iSearch时，我们可能会收集您直接提供的信息，如搜索词、配置偏好，以及如果您选择创建账户，则包括账户信息。",
+    information_automatic: "自动收集的信息",
+    information_automatic_description: "当您使用我们的服务时，我们会自动收集某些信息，包括：",
+    usage_info: "使用信息，如搜索词、访问的页面和在服务上花费的时间",
+    device_info: "设备信息，如浏览器类型、操作系统和语言设置",
+    location_info: "基于您IP地址的大致位置信息",
+    cookies_info: "Cookie和类似技术，以改善您的体验",
+    how_use_information: "我们如何使用您的信息",
+    use_information_intro: "我们使用收集的信息来",
+    provide_service: "提供、维护和改进我们的搜索服务",
+    personalize_experience: "根据您的偏好个性化您的体验",
+    develop_features: "开发新功能和功能",
+    protect_security: "保护服务的安全和完整性",
+    legal_obligations: "履行法律义务",
+    information_sharing: "信息共享",
+    not_sell_info: "我们不出售您的个人信息。我们可能在以下情况下共享您的信息：",
+    service_providers: "与帮助我们运营服务的第三方服务提供商",
+    legal_requirements: "为履行法律义务，如回应传票或法院命令",
+    protect_rights: "为保护我们的权利、财产或安全，或我们用户的权利、财产或安全",
+    business_transfers: "与合并、收购或资产出售相关，并提前通知",
+    your_choices: "您的选择和权利",
+    rights_intro: "您对您的信息有某些权利和选择",
+    access_correct: "访问、更正或删除您的个人信息",
+    opt_out: "选择不接收营销通信",
+    disable_cookies: "通过浏览器设置禁用cookie",
+    data_portability: "请求您数据的可携带性",
+    exercise_rights: "要行使这些权利，请使用下面提供的信息联系我们。",
+    data_security: "数据安全",
+    security_measures:
+      "我们实施技术和组织安全措施，以保护您的信息免受未经授权的访问、丢失或更改。然而，没有系统是完全安全的，我们不能保证您信息的绝对安全。",
+    data_retention: "数据保留",
+    retention_policy:
+      "我们保留您的信息的时间仅限于提供服务和履行我们的法律义务所需的时间。当我们不再需要您的信息时，我们将删除或匿名化它。",
+    children: "儿童",
+    children_policy:
+      "我们的服务不面向13岁以下的儿童，我们不会故意收集儿童的个人信息。如果我们发现我们收集了儿童的信息，我们将采取措施删除它。",
+    policy_changes: "本政策的变更",
+    update_policy:
+      "我们可能会定期更新本政策，以反映我们做法的变化或出于其他运营、法律或监管原因。我们将通过我们的网站或其他方式通知您任何重大变更。",
+    contact: "联系",
+    questions_concerns: "如果您对本政策或您的信息有疑问、担忧或请求，请通过以下方式联系我们：",
   },
 
   "ru-RU": {
-    // General
+    // Geral
     search: "Поиск",
     search_in: "Искать в {engine} или ввести URL",
     search_with_style: "Ищите со стилем",
     feeling_lucky: "Мне повезёт",
-
-    // Categories
-    videos: "Видео",
-    shopping: "Покупки",
-    news: "Новости",
-    maps: "Карты",
-
-    // Navigation
     back: "Назад",
     forward: "Вперёд",
     reload: "Обновить",
     home: "Главная",
-
-    // Menus
-    choose_platform: "Выберите платформу для {category}",
-    choose_search_engine: "Выберите предпочитаемую поисковую систему",
-    restore_default: "Восстановить по умолчанию",
-    save: "Сохранить",
-
-    // Footer
-    about: "О нас",
-    how_it_works: "Как это работает",
-    privacy: "Конфиденциальность",
-    terms: "Условия",
-
-    // Settings
     settings: "Настройки",
     search_engine: "Поисковая система",
     appearance: "Внешний вид",
     dark_theme: "Тёмная тема",
     animations: "Анимации",
     glass_effects: "Эффекты стекла",
-
-    // Adicionado
+    choose_search_engine: "Выберите предпочитаемую поисковую систему",
+    restore_default: "Восстановить по умолчанию",
+    save: "Сохранить",
     select_language: "Выбрать язык",
+
+    // Categorias
+    videos: "Видео",
+    shopping: "Покупки",
+    news: "Новости",
+    maps: "Карты",
+
+    // Menus
+    choose_platform: "Выберите платформу для {category}",
+
+    // Rodapé
+    about: "О нас",
+    how_it_works: "Как это работает",
+    privacy: "Конфиденциальность",
+    terms: "Условия",
+    all_rights_reserved: "Все права защищены",
+    last_updated: "Последнее обновление",
+    may: "мая",
+
+    // Configurações avançadas
+    default_search_engine: "Поисковая система по умолчанию",
+    advanced_ai_search: "Расширенный поиск с использованием ИИ",
+    search_engines_available: "доступные поисковые системы",
+    selected_search_engine: "Выбранная поисковая система",
+    filter_search_engines: "Фильтр поисковых систем...",
+    customize_appearance: "Настройте внешний вид своей поисковой системы:",
+    use_theme_selector: "Используйте переключатель тем в заголовке для переключения между темами",
+
+    // Páginas estáticas
+    overview: "Обзор",
+    overview_description:
+      "iSearch - это продвинутая поисковая платформа, которая позволяет получить доступ к нескольким поисковым системам через единый интуитивный интерфейс.",
+    main_features: "Основные функции",
+    multiple_search_engines: "Несколько поисковых систем",
+    multiple_engines_description:
+      "iSearch интегрируется с более чем 20 различными поисковыми системами, включая Google, Bing, DuckDuckGo, Yahoo, Yandex и многие другие.",
+    unified_interface: "Единый интерфейс",
+    unified_interface_description:
+      "Наш чистый и интуитивный интерфейс обеспечивает последовательный опыт, независимо от того, какую поисковую систему вы выберете.",
+    tab_system: "Система вкладок",
+    tab_system_description: "iSearch позволяет открывать несколько вкладок поиска, аналогично веб-браузеру.",
+
+    // Página Sobre
+    our_mission: "Наша миссия",
+    mission_description:
+      "iSearch был создан с простой миссией: сделать поиск в интернете более эффективным, персонализированным и доступным для всех. Мы верим, что информация должна быть доступна каждому, и наша цель - предоставить платформу, которая быстро и интуитивно соединяет людей со знаниями.",
+    who_we_are: "Кто мы",
+    team_description:
+      "Мы команда энтузиастов технологий, разработчиков и дизайнеров, увлеченных созданием исключительного цифрового опыта. iSearch родился из нашего разочарования в ограничениях традиционных поисковых систем и желания предложить альтернативу, которая ставит пользователя на первое место.",
+    our_approach: "Наш подход",
+    approach_description:
+      "В отличие от других поисковых систем, iSearch не привязан к одному алгоритму или источнику данных. Наша платформа интегрирует несколько поисковых систем, позволяя вам выбрать источник, который лучше всего соответствует вашим потребностям. Мы считаем, что такой подход обеспечивает более полные и непредвзятые результаты.",
+    privacy_transparency: "Конфиденциальность и прозрачность",
+    privacy_description:
+      "Мы глубоко уважаем вашу конфиденциальность. Мы не отслеживаем вашу историю поиска для продажи данных рекламодателям и не создаем подробные профили наших пользователей. Мы считаем, что вы должны иметь полный контроль над своей личной информацией и иметь возможность просматривать веб без ущерба для вашей конфиденциальности.",
+    privacy_more_info: "Чтобы узнать больше о том, как мы обрабатываем ваши данные, см. нашу",
+    exclusive_features: "Эксклюзивные функции",
+    features_intro: "iSearch предлагает ряд эксклюзивных функций, разработанных для улучшения вашего поискового опыта:",
+    feature_multiple_engines: "Интеграция с несколькими поисковыми системами",
+    feature_clean_interface: "Чистый и интуитивно понятный интерфейс",
+    feature_voice_image: "Поддержка голосового и изображения поиска",
+    feature_themes: "Настраиваемые темы",
+    feature_tabs: "Интегрированная система вкладок",
+    feature_quick_access: "Быстрый доступ к видео, новостям, картам и покупкам",
+    our_commitment: "Наше обязательство",
+    commitment_description:
+      "Мы стремимся постоянно улучшать iSearch на основе отзывов пользователей. Мы считаем, что лучший способ создать исключительный продукт - это внимательно слушать людей, которые используют его каждый день.",
+    contact_us: "Свяжитесь с нами",
+    feedback_intro:
+      "Мы ценим ваши отзывы и предложения. Если у вас есть идеи о том, как мы можем улучшить iSearch, или если вы столкнулись с какими-либо проблемами, не стесняйтесь связаться с нами:",
+
+    // Página Termos
+    terms_acceptance: "Принятие условий",
+    welcome_terms:
+      "Добро пожаловать в iSearch. Получая доступ или используя нашу поисковую службу, вы соглашаетесь соблюдать настоящие Условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте нашу службу.",
+    service_description: "Описание службы",
+    service_description_text:
+      "iSearch - это поисковая служба, которая позволяет пользователям искать информацию в интернете через различные поисковые системы. Наша служба включает такие функции, как текстовый, изображение и голосовой поиск, а также доступ к различным категориям контента.",
+    service_use: "Использование службы",
+    legal_use:
+      "Вы соглашаетесь использовать службу только в законных целях и в соответствии с настоящими Условиями. В частности, вы соглашаетесь не:",
+    illegal_use: "Использовать службу для любых незаконных целей или запрещенных настоящими Условиями",
+    unauthorized_access: "Пытаться получить доступ к областям службы, к которым вы не авторизованы",
+    service_interference: "Вмешиваться или нарушать работу службы",
+    security_bypass: "Пытаться обойти меры безопасности или аутентификации",
+    malware_distribution:
+      "Использовать службу для распространения вредоносных программ, спама или вредоносного контента",
+    user_info_collection: "Собирать информацию о других пользователях без их согласия",
+    user_accounts: "Учетные записи пользователей",
+    account_responsibility:
+      "Некоторые функции службы могут потребовать от вас создания учетной записи. Вы несете ответственность за сохранение конфиденциальности учетных данных вашей учетной записи и за все действия, которые происходят под вашей учетной записью. Вы соглашаетесь немедленно уведомить нас о любом несанкционированном использовании вашей учетной записи.",
+    intellectual_property: "Интеллектуальная собственность",
+    ip_ownership:
+      "Служба и ее оригинальный контент, функции и функциональность являются и останутся исключительной собственностью iSearch и его лицензиаров. Служба защищена авторским правом, товарным знаком и другими законами об интеллектуальной собственности.",
+    no_copy:
+      "Вы не можете копировать, изменять, распространять, продавать или сдавать в аренду любую часть службы без нашего явного письменного разрешения.",
+    third_party_content: "Контент третьих лиц",
+    third_party_disclaimer:
+      "Служба может содержать ссылки на веб-сайты, рекламу, услуги или ресурсы третьих лиц, которые не принадлежат или не контролируются iSearch. Мы не контролируем и не несем ответственности за контент, политику конфиденциальности или практику любых веб-сайтов или служб третьих лиц.",
+    warranty_disclaimer: "Отказ от гарантий",
+    as_is_service:
+      'Служба предоставляется "как есть" и "как доступно", без каких-либо гарантий любого рода, явных или подразумеваемых. Мы не гарантируем, что служба будет соответствовать вашим требованиям, будет непрерывной, своевременной, безопасной или безошибочной.',
+    liability_limitation: "Ограничение ответственности",
+    no_liability:
+      "Ни при каких обстоятельствах iSearch, его директора, сотрудников, партнеров, агентов, поставщики или аффилированные лица не несут ответственности за любые косвенные, случайные, специальные, последующие или штрафные убытки, включая, без ограничений, потерю прибыли, данных, использования, репутации или других нематериальных потерь, возникающих из:",
+    access_inability: "Вашего доступа или использования или невозможности доступа или использования службы",
+    third_party_conduct: "Любого поведения или контента третьих лиц в службе",
+    content_obtained: "Контента, полученного через службу",
+    unauthorized_access_use: "Несанкционированного доступа, использования или изменения ваших передач или контента",
+    terms_changes: "Изменения условий",
+    modify_terms:
+      "Мы оставляем за собой право изменять или заменять эти Условия в любое время. Если пересмотр является существенным, мы постараемся предоставить уведомление не менее чем за 30 дней до вступления в силу любых новых условий. Что составляет существенное изменение, будет определяться по нашему усмотрению.",
+    applicable_law: "Применимое право",
+    governing_law:
+      "Настоящие Условия регулируются и толкуются в соответствии с законами Бразилии, без учета ее положений о коллизии правовых норм.",
+    terms_questions: "Если у вас есть какие-либо вопросы об этих Условиях, пожалуйста, свяжитесь с нами по адресу:",
+
+    // Página Privacidade
+    introduction: "Введение",
+    privacy_welcome:
+      "Добро пожаловать в Политику конфиденциальности iSearch. Эта политика описывает, как мы собираем, используем, обрабатываем и делимся вашей информацией, когда вы используете нашу поисковую службу.",
+    privacy_value:
+      "Мы ценим вашу конфиденциальность и стремимся защищать вашу личную информацию. Пожалуйста, внимательно прочитайте эту политику, чтобы понять наши практики в отношении ваших данных.",
+    information_collect: "Собираемая информация",
+    information_provide: "Информация, которую вы предоставляете нам",
+    information_provide_description:
+      "Когда вы используете iSearch, мы можем собирать информацию, которую вы предоставляете нам напрямую, такую как поисковые запросы, настройки предпочтений и информацию об аккаунте, если вы решите создать его.",
+    information_automatic: "Автоматически собираемая информация",
+    information_automatic_description:
+      "Когда вы используете нашу службу, мы автоматически собираем определенную информацию, включая:",
+    usage_info:
+      "Информация об использовании, такая как поисковые запросы, посещенные страницы и время, проведенное в службе",
+    device_info: "Информация об устройстве, такая как тип браузера, операционная система и настройки языка",
+    location_info: "Приблизительная информация о местоположении на основе вашего IP-адреса",
+    cookies_info: "Cookies и аналогичные технологии для улучшения вашего опыта",
+    how_use_information: "Как мы используем вашу информацию",
+    use_information_intro: "Мы используем собранную информацию для",
+    provide_service: "Предоставления, поддержания и улучшения нашей поисковой службы",
+    personalize_experience: "Персонализации вашего опыта на основе ваших предпочтений",
+    develop_features: "Разработки новых функций и возможностей",
+    protect_security: "Защиты безопасности и целостности службы",
+    legal_obligations: "Соответствия законным обязательствам",
+    information_sharing: "Обмен информацией",
+    not_sell_info: "Мы не продаем вашу личную информацию. Мы можем делиться вашей информацией в следующих случаях:",
+    service_providers: "С третьими лицами, которые помогают нам оперировать службой",
+    legal_requirements: "Для выполнения законных обязательств, таких как ответ на уведомления или судебные приказы",
+    protect_rights:
+      "Для защиты наших прав, собственности или безопасности, а также прав, собственности или безопасности наших пользователей",
+    business_transfers: "В связи с слиянием, приобретением или продажей активов, с предварительным уведомлением",
+    your_choices: "Ваши выборы и права",
+    rights_intro: "У вас есть определенные права и выборы в отношении вашей информации",
+    access_correct: "Доступ к, корректировке или удалению вашей личной информации",
+    opt_out: "Выбор отказа от получения маркетинговых коммуникаций",
+    disable_cookies: "Отключение cookies через настройки вашего браузера",
+    data_portability: "Запрос переносимости ваших данных",
+    exercise_rights: "Чтобы упражнить эти права, свяжитесь с нами по указанным ниже контактным данным.",
+    data_security: "Безопасность данных",
+    security_measures:
+      "Мы внедряем технические и организационные меры безопасности для защиты вашей информации от несанкционированного доступа, потери или изменения. Однако ни одна система не является полностью безопасной, и мы не можем гарантировать абсолютную безопасность вашей информации.",
+    data_retention: "Хранение данных",
+    retention_policy:
+      "Мы храним вашу информацию только столько времени, сколько необходимо для предоставления службы и выполнения наших юридических обязательств. Когда мы больше не нуждаемся в вашей информации, мы удаляем ее или анонимизируем.",
+    children: "Дети",
+    children_policy:
+      "Наша служба не предназначена для детей младше 13 лет, и мы не намеренно собираем личную информацию детей. Если мы обнаружим, что собрали информацию о ребенке, мы предпримем меры для ее удаления.",
+    policy_changes: "Изменения в этой политике",
+    update_policy:
+      "Мы можем периодически обновлять эту политику, чтобы отразить изменения в наших практиках или по другим операционным, юридическим или нормативным причинам. Мы уведомим вас о любых существенных изменениях через наш сайт или другими способами.",
+    contact: "Контакт",
+    questions_concerns:
+      "Если у вас есть вопросы, опасения или запросы, связанные с этой политикой или вашей информацией, свяжитесь с нами по адресу:",
   },
+
+  // Adicionar outras traduções conforme necessário...
 }
 
 // Hook para usar as traduções
 export function useTranslation() {
-  const [locale, setLocale] = useState<Locale>("pt-BR")
+  const [locale, setLocale] = useState<Locale>("en-US")
   const [country, setCountry] = useState<string | null>(null)
   const [translationsLoaded, setTranslationsLoaded] = useState(false)
 
@@ -881,7 +697,7 @@ export function useTranslation() {
   const changeLocale = useCallback(
     (newLocale: Locale) => {
       if (newLocale !== locale) {
-        console.log(`Mudando idioma de ${locale} para ${newLocale}`)
+        console.log(`Mudando idioma de ${locale} для ${newLocale}`)
         setLocale(newLocale)
         localStorage.setItem("locale", newLocale)
 
