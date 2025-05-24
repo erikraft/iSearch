@@ -71,7 +71,7 @@ export default function LanguageSwitcher() {
       <button
         onClick={() => setIsOpen(true)}
         className="flex items-center space-x-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-        aria-label="Mudar idioma"
+        aria-label={t("change_language")}
       >
         <FiGlobe className="text-gray-600 dark:text-gray-400" size={16} />
         <span className="text-sm text-gray-700 dark:text-gray-300 hidden sm:inline-block">{localeFlags[locale]}</span>
